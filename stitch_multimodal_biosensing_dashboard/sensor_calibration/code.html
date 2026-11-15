@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>BioSense Lab</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container": "#12212d", "surface-dim": "#061520", "on-background": "#d5e4f5", "surface-tint": "#aec6ff", "primary": "#aec6ff", "on-tertiary-container": "#00302a", "inverse-surface": "#d5e4f5", "inverse-on-surface": "#24323e", "on-primary": "#002e6a", "tertiary-fixed-dim": "#3cddc7", "tertiary-fixed": "#62fae3", "on-secondary-container": "#b4abff", "on-secondary-fixed": "#170065", "error-container": "#93000a", "inverse-primary": "#005ac3", "on-primary-container": "#00275d", "error": "#ffb4ab", "on-primary-fixed": "#001a42", "on-error": "#690005", "on-surface": "#d5e4f5", "surface-container-lowest": "#020f1b", "on-secondary": "#2a039d", "on-tertiary-fixed": "#00201c", "outline": "#8c909f", "outline-variant": "#424753", "secondary-fixed-dim": "#c7bfff", "surface": "#061520", "tertiary-container": "#00a392", "on-surface-variant": "#c2c6d6", "surface-container-high": "#1d2b38", "surface-container-highest": "#283643", "primary-fixed": "#d8e2ff", "surface-bright": "#2c3b47", "background": "#061520", "secondary-fixed": "#e4dfff", "on-primary-fixed-variant": "#004395", "on-tertiary-fixed-variant": "#005047", "surface-variant": "#283643", "on-error-container": "#ffdad6", "tertiary": "#3cddc7", "surface-container-low": "#0e1d29", "secondary-container": "#422db2", "secondary": "#c7bfff", "primary-container": "#4e8eff", "on-secondary-fixed-variant": "#422db2", "on-tertiary": "#003731", "primary-fixed-dim": "#aec6ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "1.5rem", "space-xs": "0.25rem", "space-md": "0.75rem", "space-sm": "0.5rem", "gutter": "1rem", "margin-mobile": "1rem", "gutter-dense": "0.75rem", "space-lg": "1rem", "margin": "1.5rem" }, "fontFamily": { "body-sm": ["Inter"], "mono-data-sm": ["JetBrains Mono"], "body-lg": ["Inter"], "display-lg-mobile": ["Inter"], "mono-label-xs": ["JetBrains Mono"], "headline-md": ["Inter"], "mono-metric-md": ["JetBrains Mono"], "headline-sm": ["Inter"], "label-md": ["Inter"], "body-md": ["Inter"], "display-lg": ["Inter"], "mono-metric-lg": ["JetBrains Mono"] }, "fontSize": { "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400"}], "mono-data-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400"}], "body-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400"}], "display-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}], "mono-label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}], "headline-md": ["22px", {"lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600"}], "mono-metric-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.02em", "fontWeight": "500"}], "headline-sm": ["18px", {"lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}], "body-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400"}], "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "mono-metric-lg": ["28px", {"lineHeight": "32px", "letterSpacing": "-0.03em", "fontWeight": "600"}] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="BioSense Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrBhZF_tYAd-2WO7FkexUESiEbjDHSZbe-xO59_l810m4pU_MvXzX2OGXhiP4fT3jn9v7CeU70GXjKE2OGg2xNyRuOkEyzOet6vQXY9ZNXd0nL9YqGsel46lDWuMdct095SJnvUXss9-uv3UnqTmEkP6N1rI9bUAzUPZsdKzAajtNGHetZf2aG1FACTJ6OwOzfe-_hGvzyidDbEMcldqxMxusRS6paJ64ss9K4TuTIpc_w"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate">BioSense Lab</span><span class="font-mono-label-xs text-mono-label-xs text-tertiary uppercase tracking-wider truncate">Sensor Calibration</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Search telemetry" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><button aria-label="Toggle dark mode" class="h-8 px-space-xs flex items-center gap-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[16px] text-primary">dark_mode</span><span class="material-symbols-outlined text-[16px] opacity-40">light_mode</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-margin-mobile pb-space-xl gap-space-lg">
+<!-- Hardware Status Banner -->
+<section class="bg-surface-container rounded-xl p-space-md shadow-sm relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex flex-col gap-space-xs relative z-10">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs uppercase tracking-wider text-primary flex items-center gap-1.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+          Diagnostic Matrix
+        </span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">Slot 04/04 Live</span>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Hardware Diagnostics &amp; Calibration</h1>
+<div class="flex flex-wrap items-center gap-2 mt-0.5">
+<div class="inline-flex items-center gap-1.5 bg-surface-container-highest px-2.5 py-1 rounded-full text-on-surface-variant font-mono-label-xs text-mono-label-xs">
+<span class="material-symbols-outlined text-[14px] text-tertiary">memory</span>
+          Hardware Rev 3.2
+        </div>
+<div class="inline-flex items-center gap-1.5 bg-surface-container-highest px-2.5 py-1 rounded-full text-on-surface-variant font-mono-label-xs text-mono-label-xs">
+<span class="material-symbols-outlined text-[14px] text-primary">bluetooth_connected</span>
+          BLE 5.3 Connected <span class="text-tertiary font-mono-data-sm">(4.2ms)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Telemetry Health Row -->
+<section class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container rounded-xl p-space-md flex items-center gap-space-sm shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+</div>
+<div class="min-w-0">
+<div class="font-mono-label-xs text-mono-label-xs text-on-surface-variant uppercase">Array Health</div>
+<div class="font-mono-metric-md text-mono-metric-md text-on-surface leading-tight">99.4%</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-space-md flex items-center gap-space-sm shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<div class="min-w-0">
+<div class="font-mono-label-xs text-mono-label-xs text-on-surface-variant uppercase">Sync Drift</div>
+<div class="font-mono-metric-md text-mono-metric-md text-on-surface leading-tight">±0.08<span class="text-xs text-on-surface-variant">ms</span></div>
+</div>
+</div>
+</section>
+<!-- DOMAIN 1: EEG Electrode Impedance Checker -->
+<section class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed-dim"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">EEG Electrode Impedance</h2>
+</div>
+<span class="bg-secondary-container/40 text-on-secondary-container px-2 py-0.5 rounded-full font-mono-label-xs text-mono-label-xs">
+        8-CH REF-GND
+      </span>
+</div>
+<!-- Scalp Topography & Electrode Pins -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface-variant">Electrode Mapping (10-20 Subsystem)</span>
+<span class="font-mono-data-sm text-mono-data-sm text-tertiary">All Nominals Verified</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Fp1 -->
+<div class="bg-surface-container rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-6 h-6 rounded-md bg-secondary/15 text-secondary-fixed-dim font-mono-data-sm text-mono-data-sm flex items-center justify-center font-bold">Fp1</span>
+<div class="truncate">
+<span class="block font-mono-data-sm text-mono-data-sm text-on-surface font-semibold">2.1 kΩ</span>
+<span class="block font-mono-label-xs text-mono-label-xs text-on-surface-variant truncate">Left Prefrontal</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-mono-label-xs text-mono-label-xs font-semibold">PASS</span>
+</div>
+<!-- Fp2 -->
+<div class="bg-surface-container rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-6 h-6 rounded-md bg-secondary/15 text-secondary-fixed-dim font-mono-data-sm text-mono-data-sm flex items-center justify-center font-bold">Fp2</span>
+<div class="truncate">
+<span class="block font-mono-data-sm text-mono-data-sm text-on-surface font-semibold">2.4 kΩ</span>
+<span class="block font-mono-label-xs text-mono-label-xs text-on-surface-variant truncate">Right Prefrontal</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-mono-label-xs text-mono-label-xs font-semibold">PASS</span>
+</div>
+<!-- Cz -->
+<div class="bg-surface-container rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-6 h-6 rounded-md bg-secondary/15 text-secondary-fixed-dim font-mono-data-sm text-mono-data-sm flex items-center justify-center font-bold">Cz</span>
+<div class="truncate">
+<span class="block font-mono-data-sm text-mono-data-sm text-on-surface font-semibold">1.8 kΩ</span>
+<span class="block font-mono-label-xs text-mono-label-xs text-on-surface-variant truncate">Central Midline</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-mono-label-xs text-mono-label-xs font-semibold">PASS</span>
+</div>
+<!-- Ref -->
+<div class="bg-surface-container rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2 min-w-0">
+<span class="w-6 h-6 rounded-md bg-secondary/15 text-secondary-fixed-dim font-mono-data-sm text-mono-data-sm flex items-center justify-center font-bold">Ref</span>
+<div class="truncate">
+<span class="block font-mono-data-sm text-mono-data-sm text-on-surface font-semibold">0.9 kΩ</span>
+<span class="block font-mono-label-xs text-mono-label-xs text-on-surface-variant truncate">Mastoid A1/A2</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-mono-label-xs text-mono-label-xs font-semibold">PASS</span>
+</div>
+</div>
+</div>
+<!-- Threshold Slider & Auto-zero -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between font-mono-label-xs text-mono-label-xs text-on-surface-variant">
+<span>Target Limit Threshold: &lt; <span class="text-on-surface font-semibold" id="thresh-val">5.0</span> kΩ</span>
+<span class="text-tertiary">Ideal: &lt; 2.5 kΩ</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-secondary" id="eeg-slider" max="10.0" min="1.0" oninput="document.getElementById('thresh-val').textContent = parseFloat(this.value).toFixed(1)" step="0.5" type="range" value="5.0"/>
+<div class="flex justify-between font-mono-label-xs text-mono-label-xs text-on-surface-variant/60">
+<span>1.0 kΩ</span>
+<span>5.0 kΩ</span>
+<span>10.0 kΩ</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pt-1">
+<button class="w-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md py-2 px-3 rounded-lg flex items-center justify-center gap-2 transition-colors" id="btn-autozero" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim">adjust</span>
+<span>Run Auto-Zeroing Baseline</span>
+</button>
+</div>
+</section>
+<!-- DOMAIN 2: PPG Photodiode Gain & LED Current -->
+<section class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">PPG Optical Front-End</h2>
+</div>
+<span class="bg-error-container/40 text-on-error-container px-2 py-0.5 rounded-full font-mono-label-xs text-mono-label-xs">
+        MAX30105 AFE
+      </span>
+</div>
+<!-- Dual LED Drive Readouts -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Red (660 nm)</span>
+<span class="material-symbols-outlined text-[16px] text-error">lightbulb</span>
+</div>
+<div class="font-mono-metric-lg text-mono-metric-lg text-on-surface">18.5 <span class="text-sm font-normal text-on-surface-variant font-mono-data-sm">mA</span></div>
+<div class="w-full bg-surface-container-high h-1 rounded-full mt-1 overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 74%"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">IR (940 nm)</span>
+<span class="material-symbols-outlined text-[16px] text-primary">sensors</span>
+</div>
+<div class="font-mono-metric-lg text-mono-metric-lg text-on-surface">22.0 <span class="text-sm font-normal text-on-surface-variant font-mono-data-sm">mA</span></div>
+<div class="w-full bg-surface-container-high h-1 rounded-full mt-1 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88%"></div>
+</div>
+</div>
+</div>
+<!-- TIA Gain & Rejection Stats -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between py-0.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Transimpedance Gain (TIA)</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold">50 kΩ (Feedback R)</span>
+</div>
+<div class="flex items-center justify-between py-0.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ambient Light Cancellation</span>
+<div class="flex items-center gap-1.5 font-mono-data-sm text-mono-data-sm text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Active (-42 dB)</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-0.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Photodiode Dark Current</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface">0.14 nA nominal</span>
+</div>
+</div>
+<!-- Auto-Level Control -->
+<div class="flex items-center justify-between bg-surface-container-high/60 p-space-sm rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Auto-level Photodiodes</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dynamically normalize pulse DC baseline</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="ppg-autolevel-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-surface-container after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</section>
+<!-- DOMAIN 3: IMU Gyro Drift & Accelerometer Offset -->
+<section class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">IMU Inertial Calibration</h2>
+</div>
+<span class="bg-tertiary-container/30 text-tertiary px-2 py-0.5 rounded-full font-mono-label-xs text-mono-label-xs">
+        6-DOF AXIS
+      </span>
+</div>
+<!-- Static Offset Vector Cards -->
+<div class="grid grid-cols-3 gap-space-xs text-center">
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-0.5">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Bias X</span>
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary">-0.012 <span class="text-xs">g</span></span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant/80">Δ -1.2%</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-0.5">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Bias Y</span>
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary">+0.008 <span class="text-xs">g</span></span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant/80">Δ +0.8%</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col gap-0.5">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Bias Z</span>
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary">-0.004 <span class="text-xs">g</span></span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant/80">Δ -0.4%</span>
+</div>
+</div>
+<!-- 6-Point Tumble Calibration Progress -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">6-Point Tumble Routine</span>
+<span class="font-mono-data-sm text-mono-data-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> 100% Calibrated
+        </span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full w-full"></div>
+</div>
+<div class="grid grid-cols-6 gap-1 pt-1 text-center font-mono-label-xs text-mono-label-xs text-on-surface-variant">
+<span class="text-tertiary font-bold">+X ✓</span>
+<span class="text-tertiary font-bold">-X ✓</span>
+<span class="text-tertiary font-bold">+Y ✓</span>
+<span class="text-tertiary font-bold">-Y ✓</span>
+<span class="text-tertiary font-bold">+Z ✓</span>
+<span class="text-tertiary font-bold">-Z ✓</span>
+</div>
+</div>
+<!-- Gyro Thermal Drift Matrix -->
+<div class="flex items-center justify-between bg-surface-container-lowest rounded-xl p-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Gyro Thermal Drift Coeff</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Polynomial zero-rate compensation</span>
+</div>
+<div class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold text-right">
+        0.0018 °/s/°C
+      </div>
+</div>
+</section>
+<!-- DOMAIN 4: Thermal Sensor Drift & Two-Point Reference -->
+<section class="bg-surface-container rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Core Thermistor Drift</h2>
+</div>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded-full font-mono-label-xs text-mono-label-xs">
+        NTC 10K 3950
+      </span>
+</div>
+<!-- Steinhart-Hart Formula Box -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant uppercase tracking-wider">Steinhart-Hart Equation Model</span>
+<span class="font-mono-label-xs text-mono-label-xs text-amber-300">1/T = A + B ln(R) + C [ln(R)]³</span>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-1">
+<div class="bg-surface-container p-2 rounded-lg flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Coeff A</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold truncate">1.129e-3</span>
+</div>
+<div class="bg-surface-container p-2 rounded-lg flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Coeff B</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold truncate">2.341e-4</span>
+</div>
+<div class="bg-surface-container p-2 rounded-lg flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Coeff C</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold truncate">8.775e-8</span>
+</div>
+</div>
+</div>
+<!-- Two-point verification status -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface">Two-Point Verification Trace</span>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">CALIBRATED</span>
+</div>
+<div class="flex flex-col gap-1.5 text-on-surface-variant font-mono-data-sm text-mono-data-sm">
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Ice Point Ref (0.00 °C)</span>
+<span class="text-on-surface font-mono-data-sm">0.02 °C (±0.02)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-error"></span> Boiling Ref (100.00 °C)</span>
+<span class="text-on-surface font-mono-data-sm">99.94 °C (±0.06)</span>
+</div>
+</div>
+<div class="pt-1 flex items-center justify-between font-mono-label-xs text-mono-label-xs text-on-surface-variant/70">
+<span>Verified: 2025-02-14 09:12:44 UTC</span>
+<span>Sensor ID: #TH-092</span>
+</div>
+</div>
+</section>
+<!-- Calibration Actions Footer Section -->
+<section class="flex flex-col gap-space-sm pt-space-xs">
+<!-- Primary Calibration Routine Button -->
+<button class="w-full bg-primary-container hover:bg-primary transition-all duration-200 text-on-primary font-headline-sm text-headline-sm py-3 px-space-lg rounded-xl shadow-md flex items-center justify-center gap-2 group" id="btn-run-full-cal" type="button">
+<span class="material-symbols-outlined text-[22px] group-hover:rotate-180 transition-transform duration-500">tune</span>
+<span>Run Full Calibration Routine</span>
+</button>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- EEPROM Flash Button -->
+<button class="bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface font-label-md text-label-md py-2.5 px-3 rounded-lg flex items-center justify-center gap-2" id="btn-save-eeprom" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">save</span>
+<span>Save to EEPROM</span>
+</button>
+<!-- Factory Reset Button -->
+<button class="bg-surface-container hover:bg-surface-container-high transition-colors text-error font-label-md text-label-md py-2.5 px-3 rounded-lg flex items-center justify-center gap-2" id="btn-restore-defaults" type="button">
+<span class="material-symbols-outlined text-[18px]">settings_backup_restore</span>
+<span>Restore Offsets</span>
+</button>
+</div>
+<!-- Notification Toast (Hidden by default) -->
+<div class="hidden bg-surface-container-highest text-on-surface px-space-md py-2 rounded-lg font-mono-data-sm text-mono-data-sm text-center shadow-lg transition-all" id="status-toast">
+      Offsets saved to EEPROM flash sector 0x4F00.
+    </div>
+</section>
+</div>
+<script>
+  // Simple micro-interactions for laboratory calibration controls
+  document.getElementById('btn-autozero')?.addEventListener('click', function() {
+    const btn = this;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin text-secondary-fixed-dim">sync</span><span>Auto-Zeroing...</span>';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span><span>Baseline Offset Zeroed</span>';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 2000);
+    }, 1200);
+  });
+
+  document.getElementById('btn-save-eeprom')?.addEventListener('click', function() {
+    const toast = document.getElementById('status-toast');
+    if (toast) {
+      toast.textContent = 'Hardware Flash: Offsets flushed to EEPROM sector 0x4F00 (CRC-32 PASS)';
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3500);
+    }
+  });
+
+  document.getElementById('btn-restore-defaults')?.addEventListener('click', function() {
+    const toast = document.getElementById('status-toast');
+    if (toast) {
+      toast.textContent = 'Factory presets loaded from ROM. Awaiting synchronization.';
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+  });
+
+  document.getElementById('btn-run-full-cal')?.addEventListener('click', function() {
+    const toast = document.getElementById('status-toast');
+    if (toast) {
+      toast.textContent = 'Running 4-domain diagnostic routine... Please keep sensors steady.';
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.textContent = 'All 4 domains successfully calibrated & phase-locked.';
+        setTimeout(() => toast.classList.add('hidden'), 2500);
+      }, 2000);
+    }
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.3)]" data-active-classes="text-primary font-semibold"><div class="h-16 px-space-sm flex items-center justify-around"><a class="flex flex-col items-center justify-center min-w-[64px] h-12 text-on-surface-variant hover:text-on-surface transition-colors" data-path="live-stream" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-mono-label-xs text-mono-label-xs mt-0.5">Live</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-12 text-on-surface-variant hover:text-on-surface transition-colors" data-path="models-and-formulas" href="#"><span class="material-symbols-outlined text-[20px]">functions</span><span class="font-mono-label-xs text-mono-label-xs mt-0.5">Models</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[64px] h-12 transition-colors text-primary font-semibold" data-path="sensor-calibration" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span class="font-mono-label-xs text-mono-label-xs mt-0.5">Calib</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-12 text-on-surface-variant hover:text-on-surface transition-colors" data-path="experiment-logs" href="#"><span class="material-symbols-outlined text-[20px]">history_edu</span><span class="font-mono-label-xs text-mono-label-xs mt-0.5">Logs</span></a></div></nav></body></html>

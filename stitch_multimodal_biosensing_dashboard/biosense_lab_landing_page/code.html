@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_blank" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "error": "#ffb4ab", "secondary-container": "#422db2", "surface": "#061520", "primary-container": "#4e8eff", "primary-fixed": "#d8e2ff", "primary": "#aec6ff", "surface-dim": "#061520", "inverse-on-surface": "#24323e", "background": "#061520", "on-tertiary-container": "#00302a", "surface-tint": "#aec6ff", "secondary": "#c7bfff", "on-error": "#690005", "primary-fixed-dim": "#aec6ff", "on-tertiary-fixed": "#00201c", "inverse-primary": "#005ac3", "on-surface-variant": "#c2c6d6", "on-primary-container": "#00275d", "tertiary-container": "#00a392", "on-error-container": "#ffdad6", "on-secondary-container": "#b4abff", "outline-variant": "#424753", "surface-container-high": "#1d2b38", "surface-bright": "#2c3b47", "surface-container-lowest": "#020f1b", "on-surface": "#d5e4f5", "on-tertiary-fixed-variant": "#005047", "tertiary-fixed-dim": "#3cddc7", "on-primary-fixed-variant": "#004395", "on-primary-fixed": "#001a42", "inverse-surface": "#d5e4f5", "error-container": "#93000a", "surface-container": "#12212d", "secondary-fixed": "#e4dfff", "on-secondary-fixed-variant": "#422db2", "on-secondary": "#2a039d", "secondary-fixed-dim": "#c7bfff", "on-secondary-fixed": "#170065", "on-background": "#d5e4f5", "surface-container-low": "#0e1d29", "surface-variant": "#283643", "surface-container-highest": "#283643", "on-tertiary": "#003731", "on-primary": "#002e6a", "tertiary-fixed": "#62fae3", "outline": "#8c909f", "tertiary": "#3cddc7" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "1.5rem", "space-lg": "1rem", "space-sm": "0.5rem", "gutter": "1rem", "margin-mobile": "1rem", "space-md": "0.75rem", "gutter-dense": "0.75rem", "space-xs": "0.25rem", "margin": "1.5rem" }, "fontFamily": { "mono-data-sm": ["JetBrains Mono"], "body-sm": ["Inter"], "mono-metric-md": ["JetBrains Mono"], "mono-label-xs": ["JetBrains Mono"], "label-md": ["Inter"], "display-lg-mobile": ["Inter"], "body-lg": ["Inter"], "display-lg": ["Inter"], "mono-metric-lg": ["JetBrains Mono"], "headline-md": ["Inter"], "headline-sm": ["Inter"], "body-md": ["Inter"] }, "fontSize": { "mono-data-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }], "mono-metric-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.02em", "fontWeight": "500" }], "mono-label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }], "display-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "mono-metric-lg": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.03em", "fontWeight": "600" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen"><main class="flex flex-col relative w-full bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface">
+<!-- Hero Section -->
+<section class="flex flex-col px-space-md sm:px-space-lg pt-space-lg pb-space-xl gap-space-lg">
+<!-- Version Tag -->
+<div class="flex items-center gap-space-xs self-start bg-surface-container-high px-space-md py-1.5 rounded-full shadow-sm">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-mono-label-xs text-mono-label-xs uppercase tracking-wider text-tertiary font-medium">Open-Source Research Framework v3.4</span>
+</div>
+<!-- Title & Narrative -->
+<div class="flex flex-col gap-space-sm">
+<h1 class="font-display-lg-mobile text-display-lg-mobile font-bold tracking-tight text-on-surface">
+        Scientific-grade biosensing made accessible.
+      </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+        Capture, synchronize, and analyze EEG, PPG, IMU, and thermal telemetry in real time with sub-millisecond precision.
+      </p>
+</div>
+<!-- Call to Actions -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<a class="inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary-container font-label-md text-label-md font-semibold px-space-lg py-3 rounded-lg shadow-md active:scale-95 transition-transform" href="#demo-preview">
+<span>Get started</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center gap-space-xs bg-surface-container text-on-surface font-label-md text-label-md px-space-lg py-3 rounded-lg active:scale-95 transition-transform" href="#sensor-stack">
+<span class="material-symbols-outlined text-[18px] text-primary">play_circle</span>
+<span>Explore demo</span>
+</a>
+</div>
+<!-- Live Status Strip -->
+<div class="grid grid-cols-3 gap-space-xs bg-surface-container-lowest p-space-sm rounded-xl">
+<div class="flex flex-col items-center justify-center p-space-xs text-center bg-surface-container-low rounded-lg">
+<span class="font-mono-metric-md text-mono-metric-md text-primary font-semibold">1,000 Hz</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Clock Sync</span>
+</div>
+<div class="flex flex-col items-center justify-center p-space-xs text-center bg-surface-container-low rounded-lg">
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary font-semibold">BLE 5.3</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">+ Wi-Fi 6 PHY</span>
+</div>
+<div class="flex flex-col items-center justify-center p-space-xs text-center bg-surface-container-low rounded-lg">
+<span class="font-mono-metric-md text-mono-metric-md text-secondary font-semibold">0.00%</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Packet Drop</span>
+</div>
+</div>
+</section>
+<!-- Animated Multi-Channel Waveform Oscilloscope -->
+<section class="flex flex-col px-space-md sm:px-space-lg py-space-sm gap-space-sm" id="demo-preview">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">monitor_heart</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold">Synchronized Scope</h2>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 rounded-full">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">STREAMING ACTIVE</span>
+</div>
+</div>
+<!-- Oscilloscope Display Shell -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl p-space-md gap-space-md shadow-xl overflow-hidden relative">
+<!-- Trace 1: EEG Cz (Violet Accent) -->
+<div class="flex flex-col gap-1 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between font-mono-label-xs text-mono-label-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-1.5 py-0.5 rounded font-bold bg-secondary-container text-on-secondary-container">EEG Cz</span>
+<span class="text-on-surface-variant">10-20 Int.</span>
+</div>
+<span class="text-secondary font-mono-data-sm text-mono-data-sm font-medium">±34.2 µV · 250 Hz</span>
+</div>
+<div class="w-full h-10 overflow-hidden flex items-center">
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 360 40">
+<path class="stroke-secondary" d="M0,20 Q15,4 30,22 T60,18 T90,28 T120,8 T150,24 T180,12 T210,30 T240,16 T270,22 T300,10 T330,26 T360,20" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+<animate attributename="d" dur="4s" repeatcount="indefinite" values="M0,20 Q15,4 30,22 T60,18 T90,28 T120,8 T150,24 T180,12 T210,30 T240,16 T270,22 T300,10 T330,26 T360,20;
+                        M0,20 Q15,30 30,12 T60,25 T90,10 T120,28 T150,14 T180,26 T210,10 T240,24 T270,14 T300,28 T330,12 T360,20;
+                        M0,20 Q15,4 30,22 T60,18 T90,28 T120,8 T150,24 T180,12 T210,30 T240,16 T270,22 T300,10 T330,26 T360,20"></animate>
+</path>
+</svg>
+</div>
+</div>
+<!-- Trace 2: PPG Optical (Red/Coral Accent) -->
+<div class="flex flex-col gap-1 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between font-mono-label-xs text-mono-label-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-1.5 py-0.5 rounded font-bold bg-error-container text-on-error-container">PPG OPTICAL</span>
+<span class="text-on-surface-variant">Dual 660/940nm</span>
+</div>
+<span class="text-error font-mono-data-sm text-mono-data-sm font-medium">HR 68 bpm · SpO2 98.6%</span>
+</div>
+<div class="w-full h-10 overflow-hidden flex items-center">
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 360 40">
+<!-- Realistic PPG wave with sharp systolic peak and dicrotic notch -->
+<path class="stroke-error" d="M0,32 L20,32 C30,32 35,4 45,4 C52,4 58,18 64,18 C70,18 75,12 82,14 C92,17 100,32 110,32 L140,32 C150,32 155,4 165,4 C172,4 178,18 184,18 C190,18 195,12 202,14 C212,17 220,32 230,32 L260,32 C270,32 275,4 285,4 C292,4 298,18 304,18 C310,18 315,12 322,14 C332,17 340,32 360,32" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+<animatetransform attributename="transform" dur="2s" from="0,0" repeatcount="indefinite" to="-120,0" type="translate"></animatetransform>
+</path>
+</svg>
+</div>
+</div>
+<!-- Trace 3: IMU 6-DOF (Teal Accent) -->
+<div class="flex flex-col gap-1 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between font-mono-label-xs text-mono-label-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-1.5 py-0.5 rounded font-bold bg-on-tertiary-container text-tertiary-fixed">IMU KINEMATICS</span>
+<span class="text-on-surface-variant">Acc + Gyro</span>
+</div>
+<span class="text-tertiary font-mono-data-sm text-mono-data-sm font-medium">ωz: 14.8°/s · 1.02g</span>
+</div>
+<div class="w-full h-10 overflow-hidden flex items-center">
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 360 40">
+<path class="stroke-tertiary" d="M0,20 C30,32 60,8 90,20 C120,32 150,8 180,20 C210,32 240,8 270,20 C300,32 330,8 360,20" stroke-linecap="round" stroke-width="1.6"></path>
+<path class="stroke-tertiary opacity-40" d="M0,18 C40,10 70,28 110,18 C150,8 180,30 220,18 C260,8 290,30 330,18 C350,12 360,15 360,18" stroke-dasharray="3 3" stroke-width="1.2"></path>
+</svg>
+</div>
+</div>
+<!-- Trace 4: Core Therm (Amber/Gold Accent) -->
+<div class="flex flex-col gap-1 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex items-center justify-between font-mono-label-xs text-mono-label-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-1.5 py-0.5 rounded font-bold bg-surface-container-high text-primary-fixed">CORE THERM</span>
+<span class="text-on-surface-variant">Steinhart Array</span>
+</div>
+<span class="text-primary-fixed font-mono-data-sm text-mono-data-sm font-medium">36.84 °C (±0.02)</span>
+</div>
+<div class="w-full h-8 overflow-hidden flex items-center">
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 360 30">
+<path class="stroke-primary-fixed" d="M0,16 Q45,15 90,16 T180,15 T270,16 T360,15.5" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Telemetry Bottom Bar -->
+<div class="flex items-center justify-between pt-space-xs font-mono-label-xs text-mono-label-xs text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span>
+          PTS Hardware Synced
+        </span>
+<span>Jitter: 0.38 ms</span>
+</div>
+</div>
+</section>
+<!-- Multi-Sensor Array Cards Grid -->
+<section class="flex flex-col px-space-md sm:px-space-lg py-space-lg gap-space-md" id="sensor-stack">
+<div class="flex flex-col gap-1">
+<span class="font-mono-label-xs text-mono-label-xs uppercase text-primary tracking-wider font-semibold">Sensor Topography</span>
+<h2 class="font-headline-sm text-headline-sm font-bold">Synchronized Multi-Modal Modalities</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Engineered for co-located spatial tracking, high-rate biopotentials, and hemodynamic telemetry.</p>
+</div>
+<!-- Modality Card 1: EEG -->
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs px-2 py-0.5 rounded-full font-bold bg-secondary-container text-on-secondary-container">
+          EEG MODALITY
+        </span>
+<span class="material-symbols-outlined text-secondary text-[20px]">psychology</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Neural Potentials</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          Ultra-low noise biopotential analog front-end designed for cortex spectral mapping, P300 ERPs, and microstate decomposition.
+        </p>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs font-mono-label-xs text-mono-label-xs">
+<div class="bg-surface-container-high p-space-xs rounded flex flex-col">
+<span class="text-on-surface-variant">ADC Dynamic Range</span>
+<span class="text-secondary font-semibold text-mono-data-sm">24-bit Delta-Sigma</span>
+</div>
+<div class="bg-surface-container-high p-space-xs rounded flex flex-col">
+<span class="text-on-surface-variant">Front-End Noise</span>
+<span class="text-secondary font-semibold text-mono-data-sm">&lt; 0.45 µV RMS</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 font-mono-label-xs text-mono-label-xs text-on-surface-variant pt-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary">offline_bolt</span>
+<span>Automated 10-20 active impedance interrogation</span>
+</div>
+</div>
+<!-- Modality Card 2: PPG -->
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs px-2 py-0.5 rounded-full font-bold bg-error-container text-on-error-container">
+          PPG HEMODYNAMICS
+        </span>
+<span class="material-symbols-outlined text-error text-[20px]">ecg_heart</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Photoplethysmography</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          Dual optical wavelength emission array with ambient solar rejection, extracting arterial wave transit times and beat-by-beat vagal tone.
+        </p>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs font-mono-label-xs text-mono-label-xs">
+<div class="bg-surface-container-high p-space-xs rounded flex flex-col">
+<span class="text-on-surface-variant">Emitters</span>
+<span class="text-error font-semibold text-mono-data-sm">660 nm / 940 nm</span>
+</div>
+<div class="bg-surface-container-high p-space-xs rounded flex flex-col">
+<span class="text-on-surface-variant">Extracted Metrics</span>
+<span class="text-error font-semibold text-mono-data-sm">HRV, RMSSD, SpO2</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 font-mono-label-xs text-mono-label-xs text-on-surface-variant pt-1">
+<span class="material-symbols-outlined text-[15px] text-primary">ssid_chart</span>
+<span>Continuous dicrotic reflection index profiling</span>
+</div>
+</div>
+<!-- Modality Card 3: IMU -->
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs px-2 py-0.5 rounded-full font-bold bg-on-tertiary-container text-tertiary-fixed">
+          IMU INERTIAL
+        </span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">explore</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">6-DOF Kinematics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          High-bandwidth triaxial gyroscope and accelerometer for head pose estimation, micro-tremor quantification, and motion artifact mitigation.
+        </p>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs font-mono-label-xs text-mono-label-xs">
+<div class="bg-surface-container-high p-space-xs rounded flex flex-col">
+<span class="text-on-surface-variant">Accelerometer</span>
+<span class="text-tertiary font-semibold text-mono-data-sm">±16g Configurable</span>
+</div>
+<div class="bg-surface-container-high p-space-xs rounded flex flex-col">
+<span class="text-on-surface-variant">Gyroscope</span>
+<span class="text-tertiary font-semibold text-mono-data-sm">2,000 dps Low-Drift</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 font-mono-label-xs text-mono-label-xs text-on-surface-variant pt-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary">view_in_ar</span>
+<span>Madgwick fusion with quaternion vector output</span>
+</div>
+</div>
+<!-- Modality Card 4: Thermometry -->
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs px-2 py-0.5 rounded-full font-bold bg-surface-container-high text-primary-fixed">
+          THERMAL SENSING
+        </span>
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">device_thermostat</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Thermal Gradient Array</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          Continuous sub-dermal boundary and ambient reference measurement calibrated via polynomial Steinhart-Hart correction.
+        </p>
+</div>
+<div class="grid grid-cols-2 gap-space-xs pt-space-xs font-mono-label-xs text-mono-label-xs">
+<div class="bg-surface-container-high p-space-xs rounded flex flex-col">
+<span class="text-on-surface-variant">Resolution</span>
+<span class="text-primary-fixed font-semibold text-mono-data-sm">±0.05 °C Absolute</span>
+</div>
+<div class="bg-surface-container-high p-space-xs rounded flex flex-col">
+<span class="text-on-surface-variant">Sample Frequency</span>
+<span class="text-primary-fixed font-semibold text-mono-data-sm">50 Hz Synchronous</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 font-mono-label-xs text-mono-label-xs text-on-surface-variant pt-1">
+<span class="material-symbols-outlined text-[15px] text-primary">thermostat</span>
+<span>Heat-flux balance &amp; skin contact validation</span>
+</div>
+</div>
+</section>
+<!-- How It Works Strip (5 Sequential Steps) -->
+<section class="flex flex-col px-space-md sm:px-space-lg py-space-lg gap-space-md bg-surface-container-lowest">
+<div class="flex flex-col gap-1">
+<span class="font-mono-label-xs text-mono-label-xs uppercase text-tertiary tracking-wider font-semibold">Workflow</span>
+<h2 class="font-headline-sm text-headline-sm font-bold">From Sensor Boot to Published Data</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Zero-configuration scientific pipeline built for lab benches and field studies alike.</p>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Step 1 -->
+<div class="flex items-start gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<span class="flex items-center justify-center font-mono-data-sm text-mono-data-sm font-bold w-7 h-7 rounded-lg bg-surface-container-high text-primary shrink-0">01</span>
+<div class="flex flex-col">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Pair Sensor Node</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Instant hardware handshake via USB-C or low-latency BLE 5.3 broadcast beaconing.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<span class="flex items-center justify-center font-mono-data-sm text-mono-data-sm font-bold w-7 h-7 rounded-lg bg-surface-container-high text-primary shrink-0">02</span>
+<div class="flex flex-col">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Impedance &amp; Calib</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Automated lead impedance checks (&lt;5kΩ target) and static gravity vector auto-tare.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-start gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<span class="flex items-center justify-center font-mono-data-sm text-mono-data-sm font-bold w-7 h-7 rounded-lg bg-surface-container-high text-primary shrink-0">03</span>
+<div class="flex flex-col">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Stream Multi-Modal</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Hardware-synchronized 1,000 Hz frame interleaving across biopotentials, optical, and motion.</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex items-start gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<span class="flex items-center justify-center font-mono-data-sm text-mono-data-sm font-bold w-7 h-7 rounded-lg bg-surface-container-high text-primary shrink-0">04</span>
+<div class="flex flex-col">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Run Neural Models</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Execute on-device pulse transit time, frontal alpha asymmetry, and cognitive load filters.</p>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="flex items-start gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<span class="flex items-center justify-center font-mono-data-sm text-mono-data-sm font-bold w-7 h-7 rounded-lg bg-surface-container-high text-primary shrink-0">05</span>
+<div class="flex flex-col">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Export Research Data</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">One-click streaming via Lab Streaming Layer (LSL), raw EDF, HDF5, and tidy-formatted CSVs.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Monospace Formula & Theory Callout -->
+<section class="flex flex-col px-space-md sm:px-space-lg py-space-lg gap-space-sm">
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs uppercase text-on-surface-variant">Hemodynamic Algorithm</span>
+<span class="material-symbols-outlined text-primary text-[18px]">functions</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg font-mono-data-sm text-mono-data-sm text-primary overflow-x-auto whitespace-nowrap">
+        PTT = t_peak(PPG_optical) - t_Rpeak(EEG_ECG_sync)
+      </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Sub-millisecond hardware time-stamping allows real-time derivation of Pulse Transit Time (PTT) with zero temporal drift across separate recording units.
+      </p>
+</div>
+</section>
+<!-- Research & Hardware Metrics (Trust Stats) -->
+<section class="flex flex-col px-space-md sm:px-space-lg py-space-md gap-space-md">
+<div class="grid grid-cols-3 gap-space-xs">
+<div class="flex flex-col items-center justify-center p-space-md bg-surface-container rounded-xl text-center shadow-sm">
+<span class="font-mono-metric-lg text-mono-metric-lg text-primary font-bold">10M+</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant mt-1">Frames Logged</span>
+</div>
+<div class="flex flex-col items-center justify-center p-space-md bg-surface-container rounded-xl text-center shadow-sm">
+<span class="font-mono-metric-lg text-mono-metric-lg text-tertiary font-bold">&lt;1.2ms</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant mt-1">Sync Jitter</span>
+</div>
+<div class="flex flex-col items-center justify-center p-space-md bg-surface-container rounded-xl text-center shadow-sm">
+<span class="font-mono-metric-lg text-mono-metric-lg text-secondary font-bold">100%</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant mt-1">Open Standards</span>
+</div>
+</div>
+</section>
+<!-- Interactive Quick-Start Playground Tab -->
+<section class="flex flex-col px-space-md sm:px-space-lg py-space-lg gap-space-md">
+<div class="flex flex-col bg-surface-container rounded-xl p-space-md gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Python SDK in 3 Lines</h3>
+<span class="font-mono-label-xs text-mono-label-xs px-2 py-0.5 rounded bg-surface-container-high text-tertiary">pip install biosense-lab</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-lg font-mono-data-sm text-mono-data-sm flex flex-col gap-1 overflow-x-auto text-on-surface">
+<div><span class="text-tertiary">import</span> biosense <span class="text-tertiary">as</span> bs</div>
+<div>node = bs.connect(modality=[<span class="text-secondary">'EEG'</span>, <span class="text-error">'PPG'</span>, <span class="text-tertiary">'IMU'</span>])</div>
+<div>stream = node.stream_synchronized(clock_hz=<span class="text-primary">1000</span>)</div>
+<div class="text-on-surface-variant"># Telemetry ready for MNE, SciPy, or PyTorch</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<button class="flex items-center gap-space-xs font-label-md text-label-md text-primary active:scale-95 transition-transform" id="copy-btn" onclick="const b=this;b.querySelector('span:last-child').textContent='Copied!';setTimeout(()=&gt;b.querySelector('span:last-child').textContent='Copy Snippet',1800);">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Copy Snippet</span>
+</button>
+<a class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1 hover:text-on-surface" href="#docs">
+<span>Read SDK API</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Research Notice Disclaimer & Footer -->
+<footer class="flex flex-col px-space-md sm:px-space-lg pt-space-md pb-space-xl gap-space-lg bg-surface-container-lowest mt-space-lg">
+<!-- Medical Disclaimer Box -->
+<div class="flex items-start gap-space-sm p-space-md bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">info</span>
+<div class="flex flex-col gap-1">
+<span class="font-mono-label-xs text-mono-label-xs font-bold text-on-surface uppercase tracking-wider">Research &amp; Prototyping Notice</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          BioSense Lab hardware and software framework is strictly intended for academic research, human-computer interaction prototyping, and wellness exploration. 
+          <strong class="text-on-surface font-semibold">NOT A MEDICAL DEVICE.</strong> Not intended to diagnose, treat, cure, or prevent any disease, pathology, or medical condition.
+        </p>
+</div>
+</div>
+<!-- Quick Footer Links -->
+<div class="grid grid-cols-2 gap-space-md font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex flex-col gap-2">
+<span class="font-mono-label-xs text-mono-label-xs font-semibold text-on-surface uppercase">Framework</span>
+<a class="hover:text-primary transition-colors" href="#docs">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#python">Python SDK</a>
+<a class="hover:text-primary transition-colors" href="#lsl">LSL Streaming Protocol</a>
+<a class="hover:text-primary transition-colors" href="#firmware">ESP32-S3 Firmware</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-mono-label-xs text-mono-label-xs font-semibold text-on-surface uppercase">Community</span>
+<a class="hover:text-primary transition-colors" href="#github">GitHub Repository</a>
+<a class="hover:text-primary transition-colors" href="#discord">Community Discord</a>
+<a class="hover:text-primary transition-colors" href="#cern">CERN-OHL Hardware Specs</a>
+<a class="hover:text-primary transition-colors" href="#benchmarks">Jitter Benchmarks</a>
+</div>
+</div>
+<!-- Copyright & Licensing -->
+<div class="flex flex-col gap-1 pt-space-sm border-t border-surface-container-high font-mono-label-xs text-mono-label-xs text-on-surface-variant">
+<span>© 2025 BioSense Lab Research Initiative.</span>
+<span>Open-source framework distributed under MIT &amp; CERN-OHL-P licenses.</span>
+</div>
+</footer>
+</div></main></body></html>

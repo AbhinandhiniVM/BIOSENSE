@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "error": "#ffb4ab", "secondary-container": "#422db2", "surface": "#061520", "primary-container": "#4e8eff", "primary-fixed": "#d8e2ff", "primary": "#aec6ff", "surface-dim": "#061520", "inverse-on-surface": "#24323e", "background": "#061520", "on-tertiary-container": "#00302a", "surface-tint": "#aec6ff", "secondary": "#c7bfff", "on-error": "#690005", "primary-fixed-dim": "#aec6ff", "on-tertiary-fixed": "#00201c", "inverse-primary": "#005ac3", "on-surface-variant": "#c2c6d6", "on-primary-container": "#00275d", "tertiary-container": "#00a392", "on-error-container": "#ffdad6", "on-secondary-container": "#b4abff", "outline-variant": "#424753", "surface-container-high": "#1d2b38", "surface-bright": "#2c3b47", "surface-container-lowest": "#020f1b", "on-surface": "#d5e4f5", "on-tertiary-fixed-variant": "#005047", "tertiary-fixed-dim": "#3cddc7", "on-primary-fixed-variant": "#004395", "on-primary-fixed": "#001a42", "inverse-surface": "#d5e4f5", "error-container": "#93000a", "surface-container": "#12212d", "secondary-fixed": "#e4dfff", "on-secondary-fixed-variant": "#422db2", "on-secondary": "#2a039d", "secondary-fixed-dim": "#c7bfff", "on-secondary-fixed": "#170065", "on-background": "#d5e4f5", "surface-container-low": "#0e1d29", "surface-variant": "#283643", "surface-container-highest": "#283643", "on-tertiary": "#003731", "on-primary": "#002e6a", "tertiary-fixed": "#62fae3", "outline": "#8c909f", "tertiary": "#3cddc7" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "1.5rem", "space-lg": "1rem", "space-sm": "0.5rem", "gutter": "1rem", "margin-mobile": "1rem", "space-md": "0.75rem", "gutter-dense": "0.75rem", "space-xs": "0.25rem", "margin": "1.5rem" }, "fontFamily": { "mono-data-sm": ["JetBrains Mono"], "body-sm": ["Inter"], "mono-metric-md": ["JetBrains Mono"], "mono-label-xs": ["JetBrains Mono"], "label-md": ["Inter"], "display-lg-mobile": ["Inter"], "body-lg": ["Inter"], "display-lg": ["Inter"], "mono-metric-lg": ["JetBrains Mono"], "headline-md": ["Inter"], "headline-sm": ["Inter"], "body-md": ["Inter"] }, "fontSize": { "mono-data-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }], "mono-metric-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.02em", "fontWeight": "500" }], "mono-label-xs": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }], "display-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400" }], "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "mono-metric-lg": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.03em", "fontWeight": "600" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="h-16 px-space-sm flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs min-w-0"><button aria-label="Navigate back" class="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary" onclick="history.back()"><span class="material-symbols-outlined text-[20px]">arrow_back_ios_new</span></button><div class="flex flex-col min-w-0"><h1 class="font-headline-sm text-headline-sm text-on-surface truncate">Sensor Onboarding</h1><span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant uppercase tracking-wider">Active Session Inspector</span></div></div><div class="flex items-center gap-space-xs shrink-0"><button aria-label="Inspect Parameters" class="w-11 h-11 flex items-center justify-center text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[20px]">tune</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full px-margin-mobile pt-16 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full pb-10 space-y-space-lg">
+<!-- Progress and Step Overview -->
+<div class="flex flex-col w-full pt-space-xs">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center space-x-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-mono-label-xs text-mono-label-xs text-primary font-medium tracking-wider uppercase">Step 3 of 3: Calibration &amp; Preferences</span>
+</div>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface-variant font-medium">100% Complete</span>
+</div>
+<!-- 3-Segmented Progress Bar (No borders, pure background color shifts) -->
+<div class="grid grid-cols-3 gap-1.5 w-full h-1.5 rounded-full overflow-hidden bg-surface-container-lowest p-0.5">
+<div class="h-full rounded-full bg-primary-container"></div>
+<div class="h-full rounded-full bg-primary-container"></div>
+<div class="h-full rounded-full bg-primary-container shadow-[0_0_8px_rgba(78,142,255,0.6)]"></div>
+</div>
+</div>
+<!-- Breadcrumb Navigation & Header Banner -->
+<div class="flex flex-col space-y-space-xs">
+<button class="inline-flex items-center space-x-1 text-primary hover:text-primary-fixed self-start transition-colors py-1" onclick="history.back()" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span class="font-label-md text-label-md">Back to Step 2: Signal Modalities</span>
+</button>
+<div class="flex flex-col space-y-1">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface tracking-tight">Experience level &amp; telemetry units</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Tailor metric granularity and scientific units across your real-time graphs and laboratory data exports.</p>
+</div>
+</div>
+<!-- Decorative Context Visual Prompt -->
+<div class="relative w-full h-36 rounded-xl overflow-hidden shadow-lg bg-surface-container-low flex items-center p-space-md">
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest via-surface-container to-transparent z-10"></div>
+<div class="absolute right-0 top-0 bottom-0 w-2/3 bg-cover bg-center opacity-30" data-alt="High precision biosensing oscilloscope interface displaying multi-channel neurological waveforms and clean mathematical Fourier transform traces in a futuristic dark scientific laboratory with glowing cyan and indigo ambient light." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDiwZmuFcaKYSnMrHwajy8WrXd-WYEKUMuH9vm2y6f0KaL1TjAmRuMTOwE8iIe8ZqKkvvD7T5x7b7Qy2WGA7v_YpKtP_1bUD4-OmMO2ODqcEm0Uks6Wg9YXr72mybdxCpgxaRaapbizGBURg1l3qwLUubq_AuvZMgugeHfvHs7LB5VtMm3i3tQTLdUnw0C-URDk91wdinoa642POHE_1SZEQ8BnwkfrYeAqd6tJ6nLn')"></div>
+<div class="relative z-20 flex flex-col space-y-1 max-w-[70%]">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified</span>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary uppercase tracking-wider">LSL Stream Engine 4.2</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-on-surface">Precision Metrology Mode</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Standardized IEEE-11073 nomenclature active with automatic impedance baseline verification.</p>
+</div>
+</div>
+<!-- SECTION 1: Experience Level Selection -->
+<div class="flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold tracking-wide uppercase">1. Operator Experience Level</label>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Presets UI Complexity</span>
+</div>
+<div class="flex flex-col space-y-space-sm" id="experience-tier-container">
+<!-- Card A: Novice -->
+<div class="experience-card cursor-pointer rounded-xl p-space-md bg-surface-container transition-all shadow-sm relative overflow-hidden group" onclick="selectExperience(this, 'novice')">
+<div class="flex items-start justify-between">
+<div class="flex items-start space-x-space-sm min-w-0">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant shrink-0 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">school</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">Novice / Student</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">Simplified metrics, guided tooltips, automated baseline taring, and safe standard frequency presets.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px] checkmark-icon shrink-0 ml-2">radio_button_unchecked</span>
+</div>
+</div>
+<!-- Card B: Researcher (Default Selected) -->
+<div class="experience-card active-card cursor-pointer rounded-xl p-space-md bg-surface-container-high shadow-[0_0_20px_-3px_rgba(78,142,255,0.25)] relative overflow-hidden transition-all" onclick="selectExperience(this, 'researcher')">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="flex items-start justify-between">
+<div class="flex items-start space-x-space-sm min-w-0">
+<div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">biotech</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center space-x-2">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Experienced Researcher</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-mono-label-xs text-mono-label-xs uppercase tracking-wider font-semibold">Optimal</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">Raw microvolt and millivolt traces, advanced Kalman/Butterworth filter controls, electrode impedance diagnostics, and LaTeX formula notation.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary-container text-[20px] checkmark-icon shrink-0 ml-2" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Card C: DSP Engineer -->
+<div class="experience-card cursor-pointer rounded-xl p-space-md bg-surface-container transition-all shadow-sm relative overflow-hidden group" onclick="selectExperience(this, 'engineer')">
+<div class="flex items-start justify-between">
+<div class="flex items-start space-x-space-sm min-w-0">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant shrink-0 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface">Firmware &amp; DSP Engineer</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">Direct register read/write, raw integer ADC counts, hex byte packet sniffers, SPI loopback tests, and custom baud clock multipliers.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px] checkmark-icon shrink-0 ml-2">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Telemetry Unit Selectors -->
+<div class="flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold tracking-wide uppercase">2. Telemetry &amp; Dimension Units</label>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">SI Compliant</span>
+</div>
+<div class="flex flex-col space-y-space-sm">
+<!-- 2.1 Temperature -->
+<div class="rounded-xl p-space-md bg-surface-container space-y-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-tertiary text-[18px]">thermostat</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Core Temperature</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary font-mono">Steinhart-Hart</span>
+</div>
+<div class="grid grid-cols-2 gap-1.5 p-1 rounded-lg bg-surface-container-lowest">
+<button class="unit-btn active-seg py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all bg-primary-container text-on-primary-container shadow-sm flex items-center justify-center space-x-1" onclick="updateSegment(this, 'temp', '°C')" type="button">
+<span>°C Celsius</span>
+<span class="opacity-80 text-[10px]">(Std)</span>
+</button>
+<button class="unit-btn py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all text-on-surface-variant hover:text-on-surface flex items-center justify-center" onclick="updateSegment(this, 'temp', '°F')" type="button">
+<span>°F Fahrenheit</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">Calibrated via high-sensitivity NTC ceramic bead thermistors (±0.05°C precision).</p>
+</div>
+<!-- 2.2 Kinematics -->
+<div class="rounded-xl p-space-md bg-surface-container space-y-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">motion_sensor_active</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Kinematics &amp; Linear IMU</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant font-mono">6-DoF Fusion</span>
+</div>
+<div class="grid grid-cols-3 gap-1.5 p-1 rounded-lg bg-surface-container-lowest">
+<button class="unit-btn active-seg py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all bg-primary-container text-on-primary-container shadow-sm text-center" onclick="updateSegment(this, 'imu', 'g')" type="button">
+            g (9.81 m/s²)
+          </button>
+<button class="unit-btn py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all text-on-surface-variant hover:text-on-surface text-center" onclick="updateSegment(this, 'imu', 'm/s²')" type="button">
+            m/s²
+          </button>
+<button class="unit-btn py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all text-on-surface-variant hover:text-on-surface text-center" onclick="updateSegment(this, 'imu', 'RAW')" type="button">
+            ADC Counts
+          </button>
+</div>
+</div>
+<!-- 2.3 EEG Potential -->
+<div class="rounded-xl p-space-md bg-surface-container space-y-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-[18px]">electric_bolt</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">EEG Biopotential Scale</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-primary font-mono">ADC 24-Bit</span>
+</div>
+<div class="grid grid-cols-3 gap-1.5 p-1 rounded-lg bg-surface-container-lowest">
+<button class="unit-btn active-seg py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all bg-primary-container text-on-primary-container shadow-sm text-center" onclick="updateSegment(this, 'eeg', 'µV')" type="button">
+            µV (Microvolts)
+          </button>
+<button class="unit-btn py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all text-on-surface-variant hover:text-on-surface text-center" onclick="updateSegment(this, 'eeg', 'mV')" type="button">
+            mV (Millivolts)
+          </button>
+<button class="unit-btn py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all text-on-surface-variant hover:text-on-surface text-center" onclick="updateSegment(this, 'eeg', 'Z-Score')" type="button">
+            Z-Normalized
+          </button>
+</div>
+</div>
+<!-- 2.4 Synchronization Timestamp -->
+<div class="rounded-xl p-space-md bg-surface-container space-y-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[18px]">schedule</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Packet Timestamp Sync</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant font-mono">PTP / NTP</span>
+</div>
+<div class="grid grid-cols-3 gap-1.5 p-1 rounded-lg bg-surface-container-lowest">
+<button class="unit-btn active-seg py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all bg-primary-container text-on-primary-container shadow-sm text-center" onclick="updateSegment(this, 'sync', 'Epoch ms')" type="button">
+            Epoch ms
+          </button>
+<button class="unit-btn py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all text-on-surface-variant hover:text-on-surface text-center" onclick="updateSegment(this, 'sync', 'ISO UTC')" type="button">
+            ISO 8601 UTC
+          </button>
+<button class="unit-btn py-2 rounded-md font-mono-data-sm text-mono-data-sm font-medium transition-all text-on-surface-variant hover:text-on-surface text-center" onclick="updateSegment(this, 'sync', 'Rel Index')" type="button">
+            Sample Index
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Formula & Calibration Micro-Block -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md space-y-space-xs shadow-inner">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant uppercase tracking-wider">Dynamic Transform Function</span>
+<span class="font-mono-label-xs text-mono-label-xs text-primary font-mono">f_sampling = 1000Hz</span>
+</div>
+<div class="py-2 px-space-sm rounded-lg bg-surface-container-low font-mono-data-sm text-mono-data-sm text-primary tracking-wide overflow-x-auto text-center">
+      V_out(t) = G_inst · ∑ [ (ADC_raw - ADC_tare) · (V_ref / 2²³) ] · e^( -jωt )
+    </div>
+</div>
+<!-- SECTION 3: Live Configured Profile Summary -->
+<div class="rounded-xl p-space-md bg-surface-container-low shadow-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment_turned_in</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Configured Profile Summary</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-tertiary font-mono-label-xs text-mono-label-xs uppercase">Valid Hash</span>
+</div>
+<div class="rounded-lg bg-surface-container-lowest p-space-md space-y-2 font-mono-data-sm text-mono-data-sm">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant">Profile Role:</span>
+<span class="text-primary font-semibold" id="summary-role">Academic Researcher</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant">Active Pipelines:</span>
+<span class="text-on-surface">EEG Spectral + PPG HRV + IMU</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant">Telemetry Metrics:</span>
+<span class="text-tertiary" id="summary-units">µV, °C, g, Epoch ms</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant">Lab Streaming Layer:</span>
+<span class="inline-flex items-center space-x-1 text-primary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary inline-block"></span>
+<span>Broadcast Active (1000 Hz)</span>
+</span>
+</div>
+</div>
+</div>
+<!-- SECTION 4: Final Submission Actions -->
+<div class="flex flex-col space-y-space-md pt-space-xs">
+<button class="w-full py-3.5 px-space-lg rounded-xl bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-semibold shadow-lg hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center space-x-2 group" id="launch-button" onclick="launchTelemetryLab()" type="button">
+<span class="material-symbols-outlined text-[22px] group-hover:-translate-y-0.5 transition-transform" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+<span>Complete Setup &amp; Launch Lab</span>
+</button>
+<div class="flex items-center justify-center space-x-4">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors underline underline-offset-4" onclick="resetToLabDefaults()" type="button">
+        Reset to Lab Defaults
+      </button>
+<span class="text-outline-variant font-mono-label-xs text-mono-label-xs">•</span>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="javascript:void(0)">
+        Export JSON Spec
+      </a>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic State Store
+  const userPreferences = {
+    role: 'Academic Researcher',
+    temp: '°C',
+    imu: 'g',
+    eeg: 'µV',
+    sync: 'Epoch ms'
+  };
+
+  function updateSummaryDisplay() {
+    const roleElem = document.getElementById('summary-role');
+    const unitsElem = document.getElementById('summary-units');
+    if (roleElem) roleElem.textContent = userPreferences.role;
+    if (unitsElem) {
+      unitsElem.textContent = `${userPreferences.eeg}, ${userPreferences.temp}, ${userPreferences.imu}, ${userPreferences.sync}`;
+    }
+  }
+
+  function selectExperience(cardElement, tier) {
+    const container = document.getElementById('experience-tier-container');
+    const allCards = container.querySelectorAll('.experience-card');
+    
+    allCards.forEach(c => {
+      c.classList.remove('bg-surface-container-high', 'shadow-[0_0_20px_-3px_rgba(78,142,255,0.25)]', 'active-card');
+      c.classList.add('bg-surface-container');
+      
+      // Remove left edge bar if present
+      const bar = c.querySelector('.absolute.left-0');
+      if (bar) bar.remove();
+
+      // Reset icons
+      const check = c.querySelector('.checkmark-icon');
+      if (check) {
+        check.textContent = 'radio_button_unchecked';
+        check.classList.remove('text-primary-container');
+        check.classList.add('text-outline-variant');
+        check.removeAttribute('style');
+      }
+
+      // Reset icon box
+      const iconBox = c.querySelector('.w-8.h-8');
+      if (iconBox) {
+        iconBox.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+        iconBox.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+      }
+    });
+
+    // Apply active styles to clicked card
+    cardElement.classList.remove('bg-surface-container');
+    cardElement.classList.add('bg-surface-container-high', 'shadow-[0_0_20px_-3px_rgba(78,142,255,0.25)]', 'active-card');
+
+    const accentBar = document.createElement('div');
+    accentBar.className = 'absolute left-0 top-0 bottom-0 w-1 bg-primary-container';
+    cardElement.prepend(accentBar);
+
+    const activeCheck = cardElement.querySelector('.checkmark-icon');
+    if (activeCheck) {
+      activeCheck.textContent = 'check_circle';
+      activeCheck.classList.remove('text-outline-variant');
+      activeCheck.classList.add('text-primary-container');
+      activeCheck.setAttribute('style', "font-variation-settings: 'FILL' 1;");
+    }
+
+    const activeIconBox = cardElement.querySelector('.w-8.h-8');
+    if (activeIconBox) {
+      activeIconBox.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+      activeIconBox.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+    }
+
+    if (tier === 'novice') userPreferences.role = 'Student / Novice';
+    if (tier === 'researcher') userPreferences.role = 'Academic Researcher';
+    if (tier === 'engineer') userPreferences.role = 'Firmware DSP Engineer';
+
+    updateSummaryDisplay();
+  }
+
+  function updateSegment(btnElement, category, value) {
+    const parentContainer = btnElement.parentElement;
+    const buttons = parentContainer.querySelectorAll('.unit-btn');
+
+    buttons.forEach(btn => {
+      btn.classList.remove('bg-primary-container', 'text-on-primary-container', 'shadow-sm', 'active-seg');
+      btn.classList.add('text-on-surface-variant');
+    });
+
+    btnElement.classList.remove('text-on-surface-variant');
+    btnElement.classList.add('bg-primary-container', 'text-on-primary-container', 'shadow-sm', 'active-seg');
+
+    userPreferences[category] = value;
+    updateSummaryDisplay();
+  }
+
+  function resetToLabDefaults() {
+    userPreferences.temp = '°C';
+    userPreferences.imu = 'g';
+    userPreferences.eeg = 'µV';
+    userPreferences.sync = 'Epoch ms';
+    userPreferences.role = 'Academic Researcher';
+
+    // Trigger visual selection on second card
+    const cards = document.querySelectorAll('.experience-card');
+    if (cards[1]) selectExperience(cards[1], 'researcher');
+
+    // Trigger visual selection on first segmented items
+    const segments = document.querySelectorAll('.grid.gap-1\\.5');
+    segments.forEach(group => {
+      const firstBtn = group.querySelector('.unit-btn');
+      if (firstBtn) firstBtn.click();
+    });
+
+    updateSummaryDisplay();
+  }
+
+  function launchTelemetryLab() {
+    const launchBtn = document.getElementById('launch-button');
+    if (launchBtn) {
+      launchBtn.innerHTML = `
+        <span class="material-symbols-outlined text-[20px] animate-spin">sync</span>
+        <span>Initializing Biosensors &amp; Syncing LSL...</span>
+      `;
+      launchBtn.classList.add('opacity-90');
+      setTimeout(() => {
+        launchBtn.innerHTML = `
+          <span class="material-symbols-outlined text-[20px] text-tertiary">check</span>
+          <span>Lab Configured &amp; Connected!</span>
+        `;
+      }, 1200);
+    }
+  }
+</script></main></body></html>

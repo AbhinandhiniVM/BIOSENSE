@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>BioSense Lab - Modality Imu</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container": "#12212d", "surface-dim": "#061520", "on-background": "#d5e4f5", "surface-tint": "#aec6ff", "primary": "#aec6ff", "on-tertiary-container": "#00302a", "inverse-surface": "#d5e4f5", "inverse-on-surface": "#24323e", "on-primary": "#002e6a", "tertiary-fixed-dim": "#3cddc7", "tertiary-fixed": "#62fae3", "on-secondary-container": "#b4abff", "on-secondary-fixed": "#170065", "error-container": "#93000a", "inverse-primary": "#005ac3", "on-primary-container": "#00275d", "error": "#ffb4ab", "on-primary-fixed": "#001a42", "on-error": "#690005", "on-surface": "#d5e4f5", "surface-container-lowest": "#020f1b", "on-secondary": "#2a039d", "on-tertiary-fixed": "#00201c", "outline": "#8c909f", "outline-variant": "#424753", "secondary-fixed-dim": "#c7bfff", "surface": "#061520", "tertiary-container": "#00a392", "on-surface-variant": "#c2c6d6", "surface-container-high": "#1d2b38", "surface-container-highest": "#283643", "primary-fixed": "#d8e2ff", "surface-bright": "#2c3b47", "background": "#061520", "secondary-fixed": "#e4dfff", "on-primary-fixed-variant": "#004395", "on-tertiary-fixed-variant": "#005047", "surface-variant": "#283643", "on-error-container": "#ffdad6", "tertiary": "#3cddc7", "surface-container-low": "#0e1d29", "secondary-container": "#422db2", "secondary": "#c7bfff", "primary-container": "#4e8eff", "on-secondary-fixed-variant": "#422db2", "on-tertiary": "#003731", "primary-fixed-dim": "#aec6ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "1.5rem", "space-xs": "0.25rem", "space-md": "0.75rem", "space-sm": "0.5rem", "gutter": "1rem", "margin-mobile": "1rem", "gutter-dense": "0.75rem", "space-lg": "1rem", "margin": "1.5rem" }, "fontFamily": { "body-sm": ["Inter"], "mono-data-sm": ["JetBrains Mono"], "body-lg": ["Inter"], "display-lg-mobile": ["Inter"], "mono-label-xs": ["JetBrains Mono"], "headline-md": ["Inter"], "mono-metric-md": ["JetBrains Mono"], "headline-sm": ["Inter"], "label-md": ["Inter"], "body-md": ["Inter"], "display-lg": ["Inter"], "mono-metric-lg": ["JetBrains Mono"] }, "fontSize": { "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400"}], "mono-data-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400"}], "body-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400"}], "display-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}], "mono-label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}], "headline-md": ["22px", {"lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600"}], "mono-metric-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.02em", "fontWeight": "500"}], "headline-sm": ["18px", {"lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}], "body-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400"}], "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "mono-metric-lg": ["28px", {"lineHeight": "32px", "letterSpacing": "-0.03em", "fontWeight": "600"}] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Go back" class="w-11 h-11 -ml-space-xs flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate">BioSense Lab</span><span class="font-mono-label-xs text-mono-label-xs text-tertiary uppercase tracking-wider truncate">Modality Imu</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Search telemetry" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><button aria-label="Toggle dark mode" class="h-8 px-space-xs flex items-center gap-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[16px] text-primary">dark_mode</span><span class="material-symbols-outlined text-[16px] opacity-40">light_mode</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="px-margin-mobile py-space-md flex flex-col gap-space-lg">
+<!-- Header Section -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs flex-wrap">
+<div class="h-[22px] px-space-sm bg-tertiary/15 rounded-full flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary tracking-wider font-semibold">MODALITY 03: 6-DOF KINEMATICS (IMU)</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded-full">NODE #B8-RAW</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">6-DOF Inertial Motion &amp; Biomechanics</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">High-rate synchro-telemetry for posture reconstruction, gait decomposition, and head-stabilized rejection filtering.</p>
+</div>
+<!-- Specs & Calibration Strip -->
+<div class="bg-surface-container-low rounded-xl p-space-sm flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px] text-tertiary">memory</span>
+<span class="font-mono-label-xs text-mono-label-xs uppercase text-tertiary tracking-wider font-semibold">Hardware Calibration Stack</span>
+</div>
+<div class="font-mono-data-sm text-mono-data-sm text-on-surface flex flex-wrap items-center gap-x-2 gap-y-1">
+<span>Triaxial Accel ±16g</span>
+<span class="text-outline-variant">•</span>
+<span>Triaxial Gyro 2000 dps</span>
+<span class="text-outline-variant">•</span>
+<span class="text-tertiary">500 Hz Sync</span>
+<span class="text-outline-variant">•</span>
+<span class="text-on-surface-variant">Jitter &lt; 0.12 ms</span>
+</div>
+<div class="pt-1 mt-0.5 flex flex-wrap items-center justify-between gap-y-1 font-mono-label-xs text-mono-label-xs text-on-surface-variant">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+            6-Pt Tumble Tare: <strong class="text-tertiary">ACTIVE</strong>
+</span>
+<span>Zero-G Drift: <strong class="text-on-surface font-mono-data-sm text-mono-data-sm">0.004 g</strong></span>
+<span class="text-tertiary">Contact Temp: 34.2°C</span>
+</div>
+</div>
+</div>
+<!-- Sub-navigation Tabs -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 -mx-margin-mobile px-margin-mobile no-scrollbar">
+<button class="px-space-md py-1.5 rounded-lg bg-tertiary/15 text-tertiary font-label-md text-label-md font-medium shrink-0 flex items-center gap-1.5" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+        Overview
+      </button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0" type="button">Signal Chain</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0" type="button">Formulas</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0" type="button">Code</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md shrink-0" type="button">Pitfalls</button>
+</div>
+<!-- Live Telemetry Card (Oscillogram) -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">show_chart</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Kinematic Strip Chart</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs bg-surface-container-highest text-tertiary px-2 py-0.5 rounded">BUFFER: 2.0s REALTIME</span>
+</div>
+<!-- Live Readouts Pill Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs">
+<div class="bg-surface-container-lowest rounded-lg p-space-xs flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">AXIS Ax (X)</span>
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary mt-0.5">+0.04 <span class="text-body-sm font-body-sm text-on-surface-variant">g</span></span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-xs flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-primary">AXIS Ay (Y)</span>
+<span class="font-mono-metric-md text-mono-metric-md text-primary mt-0.5">-0.98 <span class="text-body-sm font-body-sm text-on-surface-variant">g</span></span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-xs flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-secondary">AXIS Az (Z)</span>
+<span class="font-mono-metric-md text-mono-metric-md text-secondary mt-0.5">+0.12 <span class="text-body-sm font-body-sm text-on-surface-variant">g</span></span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-xs flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">NORM ||a||</span>
+<span class="font-mono-metric-md text-mono-metric-md text-on-surface mt-0.5">0.99 <span class="text-body-sm font-body-sm text-on-surface-variant">g</span></span>
+</div>
+</div>
+<!-- Inline SVG Waveform Canvas -->
+<div class="bg-surface-container-lowest rounded-lg p-space-xs flex flex-col gap-1 relative overflow-hidden">
+<div class="flex items-center justify-between text-on-surface-variant px-1">
+<span class="font-mono-label-xs text-mono-label-xs">TRIAXIAL ACCELEROMETER (±2g Dynamic View)</span>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">SAMPLE #104,892</span>
+</div>
+<svg class="w-full h-32" preserveaspectratio="none" viewbox="0 0 360 120">
+<defs>
+<pattern height="20" id="grid" patternunits="userSpaceOnUse" width="30">
+<path d="M 30 0 L 0 0 0 20" fill="none" stroke="#1d2b38" stroke-dasharray="2 2" stroke-width="0.8"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="120" width="360"></rect>
+<!-- Zero lines -->
+<line stroke="#283643" stroke-width="1" x1="0" x2="360" y1="60" y2="60"></line>
+<line stroke="#1d2b38" stroke-dasharray="1 3" stroke-width="0.8" x1="0" x2="360" y1="20" y2="20"></line>
+<line stroke="#1d2b38" stroke-dasharray="1 3" stroke-width="0.8" x1="0" x2="360" y1="100" y2="100"></line>
+<!-- Accel X Trace (Teal) -->
+<path d="M0,58 Q30,55 60,59 T120,57 T180,62 T240,56 T300,59 T360,58" fill="none" stroke="#3cddc7" stroke-width="1.6"></path>
+<!-- Accel Y Trace (Primary/Blue - around -0.98g baseline shifted) -->
+<path d="M0,95 Q30,98 60,93 T120,96 T180,94 T240,97 T300,94 T360,95" fill="none" stroke="#aec6ff" stroke-width="1.6"></path>
+<!-- Accel Z Trace (Secondary/Lilac) -->
+<path d="M0,52 Q30,48 60,54 T120,50 T180,53 T240,49 T300,54 T360,51" fill="none" stroke="#c7bfff" stroke-width="1.6"></path>
+</svg>
+<div class="flex items-center justify-between px-1 font-mono-label-xs text-mono-label-xs text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="w-2 h-0.5 bg-tertiary"></span> Ax (Lateral)</span>
+<span class="flex items-center gap-1"><span class="w-2 h-0.5 bg-primary"></span> Ay (Gravity Axis)</span>
+<span class="flex items-center gap-1"><span class="w-2 h-0.5 bg-secondary"></span> Az (Anterior)</span>
+<span>Sweep: 50 mm/s</span>
+</div>
+</div>
+<!-- Angular Velocity Rates Bar -->
+<div class="bg-surface-container-lowest rounded-lg p-space-sm flex flex-col gap-space-xs">
+<span class="font-mono-label-xs text-mono-label-xs uppercase text-on-surface-variant font-semibold">Gyroscopic Angular Rates (deg/sec)</span>
+<div class="grid grid-cols-3 gap-space-xs">
+<div class="bg-surface-container p-2 rounded flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Roll (ωx)</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold mt-0.5">+0.8 °/s</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Pitch (ωy)</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold mt-0.5">-1.2 °/s</span>
+</div>
+<div class="bg-surface-container p-2 rounded flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">Yaw (ωz)</span>
+<span class="font-mono-data-sm text-mono-data-sm text-tertiary font-semibold mt-0.5">+12.4 °/s</span>
+</div>
+</div>
+</div>
+<!-- Zero-G Offsets Table -->
+<div class="flex flex-col gap-1">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant uppercase tracking-wider">Calibration Compensation Offsets</span>
+<div class="bg-surface-container-lowest rounded-lg p-space-xs font-mono-data-sm text-mono-data-sm flex justify-between items-center text-on-surface">
+<span>ΔAx: <strong class="text-tertiary">+0.002g</strong></span>
+<span>ΔAy: <strong class="text-tertiary">-0.001g</strong></span>
+<span>ΔAz: <strong class="text-tertiary">+0.005g</strong></span>
+<span class="text-on-surface-variant">Tare: Factory</span>
+</div>
+</div>
+</div>
+<!-- Orientation Filter Diagram (Madgwick vs EKF) -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">view_in_ar</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Sensor Fusion (Madgwick AHRS)</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs bg-tertiary/15 text-tertiary px-2 py-0.5 rounded">CONVERGED</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Gradient descent on gravity vector surfaces eliminates drift with <span class="font-mono-data-sm text-mono-data-sm text-tertiary">O(n)</span> computational efficiency, optimized for low-power wearable telemetry.
+      </p>
+<!-- Flow Architecture Diagram -->
+<div class="bg-surface-container-lowest rounded-xl p-space-sm flex flex-col gap-2 relative">
+<div class="grid grid-cols-2 gap-2 text-center">
+<div class="bg-surface-container-high p-2 rounded-lg flex flex-col items-center">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">ACCELEROMETER</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold">[ax, ay, az]</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant mt-0.5">Gravity Reference</span>
+</div>
+<div class="bg-surface-container-high p-2 rounded-lg flex flex-col items-center">
+<span class="font-mono-label-xs text-mono-label-xs text-primary">GYROSCOPE</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold">[ωx, ωy, ωz]</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant mt-0.5">Angular Rate Int.</span>
+</div>
+</div>
+<!-- Convergence node -->
+<div class="flex items-center justify-center my-0.5">
+<div class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-mono-label-xs text-mono-label-xs flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[14px]">alt_route</span>
+            Gradient Descent Minimization: ∇f(q, a)
+          </div>
+</div>
+<!-- Output Block -->
+<div class="bg-surface-container-high p-2.5 rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary uppercase font-semibold">Normalized Quaternion (q)</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">||q|| = 1.000</span>
+</div>
+<div class="font-mono-metric-md text-mono-metric-md text-on-surface flex justify-between px-1">
+<span>q₀: <strong class="text-tertiary">0.998</strong></span>
+<span>q₁: <strong class="text-on-surface-variant">0.012</strong></span>
+<span>q₂: <strong class="text-primary">-0.045</strong></span>
+<span>q₃: <strong class="text-secondary">0.021</strong></span>
+</div>
+</div>
+<!-- Euler Angle Card -->
+<div class="grid grid-cols-3 gap-2 text-center pt-1">
+<div class="bg-surface-container p-2 rounded">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Roll (φ)</span>
+<div class="font-mono-data-sm text-mono-data-sm text-tertiary font-bold mt-0.5">1.4°</div>
+</div>
+<div class="bg-surface-container p-2 rounded">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Pitch (θ)</span>
+<div class="font-mono-data-sm text-mono-data-sm text-primary font-bold mt-0.5">-5.2°</div>
+</div>
+<div class="bg-surface-container p-2 rounded">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Yaw (ψ)</span>
+<div class="font-mono-data-sm text-mono-data-sm text-on-surface font-bold mt-0.5">2.8°</div>
+</div>
+</div>
+</div>
+<!-- Madgwick Equation Block -->
+<div class="bg-surface-container-lowest rounded-lg p-space-sm flex flex-col gap-1.5">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary font-semibold uppercase">Filter Formulation</span>
+<span class="font-mono-label-xs text-mono-label-xs">Madgwick 2011</span>
+</div>
+<div class="font-mono-data-sm text-mono-data-sm text-on-surface py-1 text-center bg-surface-container rounded">
+<span class="text-tertiary">q̇</span><sub>est,t</sub> = 
+          <span class="text-primary">q̇</span><sub>ω,t</sub> - 
+          <span class="text-secondary">β</span> · 
+          ( ∇f / ||∇f|| )
+        </div>
+<!-- Parameter Tuning Row -->
+<div class="flex items-center justify-between pt-1 font-mono-label-xs text-mono-label-xs text-on-surface-variant">
+<span>Filter Gain (<span class="text-secondary">β</span>): <strong class="text-on-surface font-mono-data-sm text-mono-data-sm">0.041</strong></span>
+<span class="text-tertiary font-semibold">Gyro Bias Error: 0.003 rad/s</span>
+</div>
+</div>
+</div>
+<!-- Motion Artifact Context Card -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-high p-space-md flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary uppercase font-semibold">Multi-Sensor Validation</span>
+<span class="font-mono-label-xs text-mono-label-xs bg-surface-container px-2 py-0.5 rounded text-on-surface-variant">SYNC-VALIDATED</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px] text-tertiary">vital_signs</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">EEG Artifact Blanking</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Accelerometer spikes trigger dynamic notch filters on frontal EEG channels (Fp1, Fp2) during saccadic acceleration.</span>
+</div>
+</div>
+</div>
+<!-- Activity Classification & Biomechanical Gait Table -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">directions_run</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Kinematic Classification</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded">TFLITE 4-STATE</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<!-- State 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+              Stationary / Seated Resting
+            </span>
+<span class="font-mono-label-xs text-mono-label-xs bg-tertiary/15 text-tertiary px-1.5 py-0.5 rounded font-bold">99.2% CONF</span>
+</div>
+<div class="flex items-center justify-between font-mono-data-sm text-mono-data-sm text-on-surface-variant pt-0.5">
+<span>Tremor Band: &lt; 0.02 g RMS</span>
+<span class="text-on-surface">Status: Baseline Nominal</span>
+</div>
+</div>
+<!-- State 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+              Upper Body Ergometer Cycle
+            </span>
+<span class="font-mono-label-xs text-mono-label-xs bg-primary/15 text-primary px-1.5 py-0.5 rounded font-bold">88.4% CONF</span>
+</div>
+<div class="flex items-center justify-between font-mono-data-sm text-mono-data-sm text-on-surface-variant pt-0.5">
+<span>Cadence: <strong class="text-on-surface">62 rpm</strong></span>
+<span>Bilateral Symmetry: <strong class="text-tertiary">97.4%</strong></span>
+</div>
+</div>
+<!-- State 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-space-sm flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              Head Tremor / Micro-Saccade
+            </span>
+<span class="font-mono-label-xs text-mono-label-xs bg-secondary/15 text-secondary px-1.5 py-0.5 rounded font-bold">94.1% REJECT</span>
+</div>
+<div class="flex items-center justify-between font-mono-data-sm text-mono-data-sm text-on-surface-variant pt-0.5">
+<span>EEG Saccade Gating</span>
+<span class="text-secondary font-semibold">Ch 1-4 Suppressed</span>
+</div>
+</div>
+<!-- Gait Event Latency Card -->
+<div class="bg-surface-container-high rounded-lg p-space-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary font-semibold uppercase">Gait Phase Event Detector</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Heel Strike • Mid-Stance • Toe-Off</span>
+</div>
+<div class="text-right">
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary font-bold">12 ms</span>
+<div class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Pipeline Latency</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Formula Card: Instantaneous Jerk & Impact Force -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">functions</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Instantaneous Jerk &amp; Energetics</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant font-mono">d/dt a(t)</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-sm flex flex-col gap-2">
+<div class="font-mono-data-sm text-mono-data-sm text-center py-2 bg-surface-container rounded text-on-surface">
+          J(t) = <sup>d a(t)</sup>/<sub>dt</sub> = lim<sub>Δt→0</sub> ∑ ( <sup>Δa</sup>/<sub>Δt</sub> )
+        </div>
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<div class="bg-surface-container p-space-xs rounded flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">LIVE PEAK IMPACT JERK</span>
+<span class="font-mono-metric-md text-mono-metric-md text-tertiary mt-0.5">2.41 <span class="font-body-sm text-body-sm text-on-surface-variant">g/s</span></span>
+</div>
+<div class="bg-surface-container p-space-xs rounded flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">ESTIMATED EXPENDITURE</span>
+<span class="font-mono-metric-md text-mono-metric-md text-primary mt-0.5">3.4 <span class="font-body-sm text-body-sm text-on-surface-variant">METs</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Python SDK Snippet Card -->
+<div class="bg-surface-container rounded-xl p-space-md flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-tertiary">code</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Python Biosense SDK</span>
+</div>
+<button class="h-7 px-2.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-tertiary font-mono-label-xs text-mono-label-xs flex items-center gap-1 transition-colors" id="copy-btn" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span id="copy-label">COPY</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-space-sm overflow-x-auto">
+<pre class="font-mono-data-sm text-mono-data-sm text-on-surface leading-relaxed"><code><span class="text-secondary">from</span> biosense.kinematics <span class="text-secondary">import</span> MadgwickAHRS
+
+<span class="text-on-surface-variant"># Initialize 500 Hz fusion pipe</span>
+ahrs = MadgwickAHRS(beta=<span class="text-tertiary">0.04</span>, sample_rate=<span class="text-tertiary">500</span>)
+
+<span class="text-on-surface-variant"># Ingest stream chunk</span>
+quat = ahrs.update(acc=(ax, ay, az), gyro=(wx, wy, wz))
+roll, pitch, yaw = quat.to_euler(degrees=<span class="text-primary">True</span>)</code></pre>
+</div>
+</div>
+<!-- Bottom Actions / Quick Stream Controls -->
+<div class="flex items-center gap-space-xs pb-space-lg">
+<button class="flex-1 h-11 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded-lg flex items-center justify-center gap-2 shadow-md hover:bg-primary-fixed transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+        Stream Recalibration (Tare)
+      </button>
+<button aria-label="Export Telemetry JSON" class="w-11 h-11 bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded-lg flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for SDK code copy feedback
+  const copyBtn = document.getElementById('copy-btn');
+  const copyLabel = document.getElementById('copy-label');
+  if (copyBtn && copyLabel) {
+    copyBtn.addEventListener('click', () => {
+      const codeSnippet = "from biosense.kinematics import MadgwickAHRS\nahrs = MadgwickAHRS(beta=0.04, sample_rate=500)\nquat = ahrs.update(acc=(ax, ay, az), gyro=(wx, wy, wz))";
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(codeSnippet).then(() => {
+          copyLabel.textContent = 'COPIED!';
+          setTimeout(() => { copyLabel.textContent = 'COPY'; }, 2000);
+        });
+      } else {
+        copyLabel.textContent = 'COPIED!';
+        setTimeout(() => { copyLabel.textContent = 'COPY'; }, 2000);
+      }
+    });
+  }
+</script></main></body></html>

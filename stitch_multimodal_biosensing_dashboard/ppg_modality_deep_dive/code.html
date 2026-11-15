@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>BioSense Lab - Modality Ppg</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container": "#12212d", "surface-dim": "#061520", "on-background": "#d5e4f5", "surface-tint": "#aec6ff", "primary": "#aec6ff", "on-tertiary-container": "#00302a", "inverse-surface": "#d5e4f5", "inverse-on-surface": "#24323e", "on-primary": "#002e6a", "tertiary-fixed-dim": "#3cddc7", "tertiary-fixed": "#62fae3", "on-secondary-container": "#b4abff", "on-secondary-fixed": "#170065", "error-container": "#93000a", "inverse-primary": "#005ac3", "on-primary-container": "#00275d", "error": "#ffb4ab", "on-primary-fixed": "#001a42", "on-error": "#690005", "on-surface": "#d5e4f5", "surface-container-lowest": "#020f1b", "on-secondary": "#2a039d", "on-tertiary-fixed": "#00201c", "outline": "#8c909f", "outline-variant": "#424753", "secondary-fixed-dim": "#c7bfff", "surface": "#061520", "tertiary-container": "#00a392", "on-surface-variant": "#c2c6d6", "surface-container-high": "#1d2b38", "surface-container-highest": "#283643", "primary-fixed": "#d8e2ff", "surface-bright": "#2c3b47", "background": "#061520", "secondary-fixed": "#e4dfff", "on-primary-fixed-variant": "#004395", "on-tertiary-fixed-variant": "#005047", "surface-variant": "#283643", "on-error-container": "#ffdad6", "tertiary": "#3cddc7", "surface-container-low": "#0e1d29", "secondary-container": "#422db2", "secondary": "#c7bfff", "primary-container": "#4e8eff", "on-secondary-fixed-variant": "#422db2", "on-tertiary": "#003731", "primary-fixed-dim": "#aec6ff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xl": "1.5rem", "space-xs": "0.25rem", "space-md": "0.75rem", "space-sm": "0.5rem", "gutter": "1rem", "margin-mobile": "1rem", "gutter-dense": "0.75rem", "space-lg": "1rem", "margin": "1.5rem" }, "fontFamily": { "body-sm": ["Inter"], "mono-data-sm": ["JetBrains Mono"], "body-lg": ["Inter"], "display-lg-mobile": ["Inter"], "mono-label-xs": ["JetBrains Mono"], "headline-md": ["Inter"], "mono-metric-md": ["JetBrains Mono"], "headline-sm": ["Inter"], "label-md": ["Inter"], "body-md": ["Inter"], "display-lg": ["Inter"], "mono-metric-lg": ["JetBrains Mono"] }, "fontSize": { "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400"}], "mono-data-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400"}], "body-lg": ["15px", {"lineHeight": "22px", "letterSpacing": "-0.005em", "fontWeight": "400"}], "display-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "600"}], "mono-label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}], "headline-md": ["22px", {"lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600"}], "mono-metric-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.02em", "fontWeight": "500"}], "headline-sm": ["18px", {"lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}], "body-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400"}], "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}], "mono-metric-lg": ["28px", {"lineHeight": "32px", "letterSpacing": "-0.03em", "fontWeight": "600"}] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><button aria-label="Go back" class="w-11 h-11 -ml-space-xs flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate">BioSense Lab</span><span class="font-mono-label-xs text-mono-label-xs text-tertiary uppercase tracking-wider truncate">Modality Ppg</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Search telemetry" class="w-11 h-11 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><button aria-label="Toggle dark mode" class="h-8 px-space-xs flex items-center gap-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[16px] text-primary">dark_mode</span><span class="material-symbols-outlined text-[16px] opacity-40">light_mode</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-safe bg-surface min-h-screen"><div class="flex flex-col w-full pb-10">
+<!-- Top Sensor Identifier & Quick Spec Banner -->
+<section class="px-margin-mobile pt-space-md flex flex-col gap-space-sm">
+<!-- Modality Badge Pill -->
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-error-container/40 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-mono-label-xs text-mono-label-xs text-error font-semibold tracking-wider">MODALITY 02: OPTICAL HEMODYNAMICS (PPG)</span>
+</div>
+<div class="flex items-center gap-1 font-mono-label-xs text-mono-label-xs text-tertiary">
+<span class="material-symbols-outlined text-[14px]">sensors</span>
+<span>CH-02 ACTIVE</span>
+</div>
+</div>
+<!-- Modality Title -->
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Photoplethysmography &amp; Vascular Metrics</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">High-rate photodiode absorption analysis for pulsatile volumetric flow</p>
+</div>
+<!-- Hardware Quick Specs Strip -->
+<div class="p-space-sm rounded-xl bg-surface-container flex flex-col gap-1.5 shadow-sm">
+<div class="flex items-center justify-between font-mono-label-xs text-mono-label-xs">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-error">wb_twilight</span>
+          OPTICAL CORE
+        </span>
+<span class="text-tertiary">PI: 4.1% [NOMINAL]</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono-data-sm text-mono-data-sm text-on-surface">
+<span class="text-error font-medium">660 nm (Red)</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-medium">940 nm (IR)</span>
+<span class="text-outline-variant">•</span>
+<span class="text-on-surface-variant">MAX30105 AFE</span>
+<span class="text-outline-variant">•</span>
+<span class="text-on-surface">100 Hz Sync</span>
+</div>
+<div class="flex items-center justify-between pt-1 font-mono-label-xs text-mono-label-xs text-on-surface-variant">
+<span>-42 dB Active Rejection</span>
+<span>TIA Gain: 50 kΩ</span>
+</div>
+</div>
+</section>
+<!-- Modality Sub-Navigation Tabs -->
+<section class="mt-space-md px-margin-mobile">
+<div class="flex items-center gap-1 p-1 bg-surface-container-lowest rounded-xl overflow-x-auto no-scrollbar shadow-inner">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 shadow-sm shrink-0" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+        Overview
+      </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container shrink-0" type="button">
+        Signal Chain
+      </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container shrink-0" type="button">
+        Formulas
+      </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container shrink-0" type="button">
+        Code
+      </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container shrink-0" type="button">
+        Pitfalls
+      </button>
+</div>
+</section>
+<!-- Main Arterial Pulse Waveform Visualizer -->
+<section class="mt-space-md px-margin-mobile">
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm shadow-md">
+<!-- Waveform Card Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-error/20 text-error font-mono-label-xs text-mono-label-xs font-semibold">AC PULSE</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Arterial Pulse Contour</span>
+</div>
+<div class="flex items-center gap-1 font-mono-label-xs text-mono-label-xs text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span>
+          REALTIME
+        </div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Single-cycle plethysmogram morphometry mapping systolic expulsion &amp; aortic valve dynamics.</p>
+<!-- SVG Diagram Container -->
+<div class="relative w-full bg-surface-container-lowest rounded-lg p-2 overflow-hidden shadow-inner">
+<!-- Grid overlay -->
+<svg class="w-full h-44 text-surface-container-high" fill="none" viewbox="0 0 340 180" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="ppgGlow" x1="0" x2="0" y1="0" y2="180">
+<stop offset="0%" stop-color="#ffb4ab" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#ffb4ab" stop-opacity="0"></stop>
+</lineargradient>
+<pattern height="20" id="grid" patternunits="userSpaceOnUse" width="20">
+<path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-dasharray="2,2" stroke-width="0.75"></path>
+</pattern>
+</defs>
+<!-- Background faint grid -->
+<rect fill="url(#grid)" height="180" width="340"></rect>
+<!-- Shaded Area Under Curve -->
+<path d="M 20 145 C 50 145, 65 140, 80 40 C 95 65, 110 95, 130 95 C 145 78, 160 88, 185 110 C 220 135, 270 145, 320 145 L 320 170 L 20 170 Z" fill="url(#ppgGlow)"></path>
+<!-- Isoelectric Baselines -->
+<line stroke="#424753" stroke-dasharray="3,3" stroke-width="1" x1="20" x2="320" y1="145" y2="145"></line>
+<text class="font-mono-label-xs" fill="#8c909f" font-size="8" x="24" y="140">Diastolic Baseline</text>
+<!-- Main Arterial Waveform (Red) -->
+<path d="M 20 145 C 50 145, 65 140, 80 40 C 95 65, 110 95, 130 95 C 145 78, 160 88, 185 110 C 220 135, 270 145, 320 145" stroke="#ffb4ab" stroke-linecap="round" stroke-width="2.5"></path>
+<!-- Systolic Peak Landmark -->
+<circle cx="80" cy="40" fill="#ffb4ab" r="4.5"></circle>
+<circle cx="80" cy="40" opacity="0.4" r="8" stroke="#ffb4ab" stroke-width="1"></circle>
+<line stroke="#ffb4ab" stroke-width="1" x1="80" x2="80" y1="40" y2="18"></line>
+<text class="font-mono-data-sm" fill="#d5e4f5" font-size="9" font-weight="600" x="84" y="18">Systolic Peak (t_sys)</text>
+<!-- Dicrotic Notch Landmark -->
+<circle cx="130" cy="95" fill="#3cddc7" r="3.5"></circle>
+<line stroke="#3cddc7" stroke-width="1" x1="130" x2="155" y1="95" y2="60"></line>
+<text class="font-mono-label-xs" fill="#3cddc7" font-size="8" x="160" y="62">Dicrotic Notch (AV Valve)</text>
+<!-- Diastolic Reflected Peak -->
+<circle cx="185" cy="110" fill="#aec6ff" r="3.5"></circle>
+<line stroke="#aec6ff" stroke-width="1" x1="185" x2="205" y1="110" y2="90"></line>
+<text class="font-mono-label-xs" fill="#aec6ff" font-size="8" x="210" y="92">Diastolic Wave</text>
+<!-- Diastolic Nadir (Valley) -->
+<circle cx="20" cy="145" fill="#8c909f" r="3"></circle>
+<circle cx="320" cy="145" fill="#8c909f" r="3"></circle>
+<text class="font-mono-label-xs" fill="#8c909f" font-size="8" x="280" y="160">Nadir (t_dia)</text>
+</svg>
+<!-- Floating Landmark Callouts -->
+<div class="mt-2 grid grid-cols-2 gap-2 text-left">
+<div class="p-2 rounded bg-surface-container-high/70 flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-error font-medium">SYSTOLIC COMPONENT</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface">t_rise: 112 ms • Max Arterial Head</span>
+</div>
+<div class="p-2 rounded bg-surface-container-high/70 flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary font-medium">DICROTIC REFLECTION</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface">Incidence Δt: 218 ms • Tone Indicator</span>
+</div>
+</div>
+</div>
+<!-- Real-Time Peak Detection Flowchart -->
+<div class="mt-space-xs flex flex-col gap-2">
+<span class="font-mono-label-xs text-mono-label-xs text-outline font-semibold tracking-wider uppercase">Peak Extraction Pipeline</span>
+<div class="grid grid-cols-1 gap-2">
+<!-- Step 1 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-primary font-mono-label-xs text-mono-label-xs flex items-center justify-center font-bold">1</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Chebyshev II Bandpass</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">0.5 Hz – 5.0 Hz zero-phase IIR</span>
+</div>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">24 dB/oct</span>
+</div>
+<!-- Step 2 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-primary font-mono-label-xs text-mono-label-xs flex items-center justify-center font-bold">2</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">2nd-Derivative (a-b-c-d-e)</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Acceleration Plethysmogram (APG)</span>
+</div>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-error">d²(PPG)/dt²</span>
+</div>
+<!-- Step 3 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-primary font-mono-label-xs text-mono-label-xs flex items-center justify-center font-bold">3</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Adaptive Refractory Gate</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Dynamic lockout t_refractory = 240 ms</span>
+</div>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">Gated</span>
+</div>
+<!-- Step 4 -->
+<div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-primary font-mono-label-xs text-mono-label-xs flex items-center justify-center font-bold">4</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Beat-by-Beat Peak Interval</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">RR = 833.3 ms (Instantaneous)</span>
+</div>
+</div>
+<div class="px-2 py-0.5 rounded bg-primary/20 text-primary font-mono-data-sm text-mono-data-sm font-semibold">72.0 BPM</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SpO2 Absorption Physics & Formula Card -->
+<section class="mt-space-md px-margin-mobile">
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-primary/20 text-primary font-mono-label-xs text-mono-label-xs font-semibold">SPECTROMETRY</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">SpO₂ Dual-Ratio Model</span>
+</div>
+<div class="p-1 rounded-full bg-surface-container-high text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">calculate</span>
+</div>
+</div>
+<!-- Recessed Monospace Formula Block -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest flex flex-col gap-2 shadow-inner">
+<div class="flex items-center justify-between font-mono-label-xs text-mono-label-xs text-outline">
+<span>RATIO OF RATIOS (BEER-LAMBERT)</span>
+<span class="text-tertiary">CALIBRATION FORMULA</span>
+</div>
+<div class="py-2 text-center font-mono-data-sm text-mono-data-sm text-on-surface bg-surface-container-low/60 rounded">
+<span class="text-on-surface-variant">R = </span>
+<span class="text-error">[ AC₆₆₀ / DC₆₆₀ ]</span>
+<span class="text-on-surface-variant"> / </span>
+<span class="text-primary">[ AC₉₄₀ / DC₉₄₀ ]</span>
+</div>
+<div class="text-center font-mono-data-sm text-mono-data-sm text-on-surface">
+<span class="text-on-surface-variant">SpO₂ (%) = </span>
+<span class="text-tertiary">110.0 − 25.0 · R</span>
+</div>
+</div>
+<!-- Live Parameter Table -->
+<div class="rounded-lg bg-surface-container-low p-2 flex flex-col gap-1.5 shadow-sm">
+<div class="grid grid-cols-3 gap-2 font-mono-label-xs text-mono-label-xs text-outline pb-1">
+<span>CHANNEL</span>
+<span class="text-center">SIGNAL RATIO</span>
+<span class="text-right">QUOTIENT</span>
+</div>
+<!-- Row Red -->
+<div class="grid grid-cols-3 gap-2 font-mono-data-sm text-mono-data-sm items-center py-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-on-surface font-medium">660 nm Red</span>
+</div>
+<span class="text-center text-on-surface-variant">1.42 mV / 1.84 V</span>
+<span class="text-right text-error font-medium">0.000772</span>
+</div>
+<!-- Row IR -->
+<div class="grid grid-cols-3 gap-2 font-mono-data-sm text-mono-data-sm items-center py-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-on-surface font-medium">940 nm IR</span>
+</div>
+<span class="text-center text-on-surface-variant">2.18 mV / 2.45 V</span>
+<span class="text-right text-primary font-medium">0.000889</span>
+</div>
+<!-- Summary Row -->
+<div class="grid grid-cols-2 gap-2 pt-2 items-center bg-surface-container-high/40 p-2 rounded">
+<div class="flex flex-col">
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">MODULATION RATIO R</span>
+<span class="font-mono-metric-md text-mono-metric-md text-on-surface">0.868</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary">ESTIMATED ARTERIAL SAT</span>
+<div class="flex items-baseline gap-1">
+<span class="font-mono-metric-lg text-mono-metric-lg text-tertiary font-bold">98.3</span>
+<span class="font-mono-data-sm text-mono-data-sm text-tertiary">%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Heart Rate Variability (HRV) Scientific Metric Cards -->
+<section class="mt-space-md px-margin-mobile flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Vascular HRV Biomarkers</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Autonomic nervous balance via pulsatile interval distribution</p>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high font-mono-label-xs text-mono-label-xs text-tertiary">N=312 BEATS</span>
+</div>
+<!-- 3 Dense Metric Cards -->
+<div class="grid grid-cols-1 gap-2.5">
+<!-- SDNN -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-2 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded bg-tertiary"></span>
+<span class="font-mono-data-sm text-mono-data-sm font-semibold text-on-surface">SDNN (Standard Deviation of NN)</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-tertiary font-semibold">NORM: 50-100 ms</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest font-mono-data-sm text-mono-data-sm text-outline text-center shadow-inner">
+          SDNN = √( 1/(N−1) · ∑ (RR_i − RR̄)² )
+        </div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Total Autonomic Power Index</span>
+<div class="flex items-baseline gap-1">
+<span class="font-mono-metric-md text-mono-metric-md text-on-surface">54.2</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">ms</span>
+</div>
+</div>
+</div>
+<!-- RMSSD -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-2 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded bg-primary"></span>
+<span class="font-mono-data-sm text-mono-data-sm font-semibold text-on-surface">RMSSD (Successive Differences)</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-primary font-semibold">VAGAL / OPTIMAL</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest font-mono-data-sm text-mono-data-sm text-outline text-center shadow-inner">
+          RMSSD = √( 1/(N−1) · ∑ (RR_{i+1} − RR_i)² )
+        </div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Parasympathetic Modulation</span>
+<div class="flex items-baseline gap-1">
+<span class="font-mono-metric-md text-mono-metric-md text-primary">42.8</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">ms</span>
+</div>
+</div>
+</div>
+<!-- pNN50 -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-2 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded bg-secondary"></span>
+<span class="font-mono-data-sm text-mono-data-sm font-semibold text-on-surface">pNN50 (Intervals &gt; 50 ms)</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-secondary font-semibold">&gt; 10% HEALTHY</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest font-mono-data-sm text-mono-data-sm text-outline text-center shadow-inner">
+          pNN50 = ( Count(|RR_{i+1} − RR_i| &gt; 50ms) / N ) · 100%
+        </div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Short-Term Vagal Resonance</span>
+<div class="flex items-baseline gap-1">
+<span class="font-mono-metric-md text-mono-metric-md text-secondary">18.6</span>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Motion Artifact & Optical Cancellation Strategy -->
+<section class="mt-space-md px-margin-mobile">
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]">filter_alt</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Artifact Cancellation &amp; SQI</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-mono-label-xs text-mono-label-xs">LMS ON</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-left">
+<div class="p-2.5 rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-mono-label-xs text-mono-label-xs text-outline font-medium">LMS ADAPTIVE FILTER</span>
+<span class="font-body-sm text-body-sm text-on-surface mt-1">Tri-axial IMU (ax, ay, az) correlated noise cancellation</span>
+<span class="font-mono-label-xs text-mono-label-xs text-primary mt-2">μ = 0.012 Convergence</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low flex flex-col justify-between">
+<span class="font-mono-label-xs text-mono-label-xs text-outline font-medium">SIGNAL QUALITY (SQI)</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-mono-metric-lg text-mono-metric-lg text-tertiary font-bold">94.2</span>
+<span class="font-mono-data-sm text-mono-data-sm text-tertiary">%</span>
+</div>
+<span class="font-mono-label-xs text-mono-label-xs text-on-surface-variant">Epoch clean • 0.8s lag</span>
+</div>
+</div>
+<!-- SQI Quality Bar -->
+<div class="w-full bg-surface-container-lowest rounded-full h-2 overflow-hidden shadow-inner flex">
+<div class="bg-tertiary h-full rounded-full" style="width: 94.2%"></div>
+</div>
+<div class="flex justify-between font-mono-label-xs text-mono-label-xs text-outline">
+<span>0% Motion Saturated</span>
+<span>100% Ideal Hemodynamic Trace</span>
+</div>
+</div>
+</section>
+<!-- Python Code Snippet & Stream Ingestion -->
+<section class="mt-space-md px-margin-mobile">
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">terminal</span>
+<span class="font-mono-data-sm text-mono-data-sm text-on-surface font-semibold">biosense.ppg Pipeline Hook</span>
+</div>
+<button class="flex items-center gap-1 font-mono-label-xs text-mono-label-xs text-primary bg-primary-container/20 px-2 py-1 rounded hover:bg-primary-container/30 transition-colors" id="copyBtn" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span id="copyText">COPY</span>
+</button>
+</div>
+<!-- Monospace Code Box -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest overflow-x-auto shadow-inner text-left">
+<pre class="font-mono-data-sm text-mono-data-sm leading-relaxed text-on-surface"><span class="text-outline"># Real-time PPG stream extraction &amp; beat windowing</span>
+<span class="text-primary font-medium">from</span> biosense.ppg <span class="text-primary font-medium">import</span> StreamAFE, PeakDetector
+
+afe = StreamAFE(port=<span class="text-tertiary">"I2C_0"</span>, rate_hz=<span class="text-error">100</span>)
+stream = afe.attach_channel(modality=<span class="text-tertiary">"PPG_DUAL"</span>)
+
+detector = PeakDetector(method=<span class="text-tertiary">'second_derivative'</span>, refractory_ms=<span class="text-error">240</span>)
+hrv_metrics = stream.compute_hrv(window_sec=<span class="text-error">60</span>, method=<span class="text-tertiary">'time_domain'</span>)
+
+<span class="text-outline"># Output: {'sdnn': 54.2, 'rmssd': 42.8, 'pnn50': 18.6, 'spo2': 98.3}</span></pre>
+</div>
+</div>
+</section>
+<!-- Interactive Script for Copy Micro-interaction -->
+<script>
+    document.getElementById('copyBtn')?.addEventListener('click', function() {
+      const code = `from biosense.ppg import StreamAFE, PeakDetector\n\nafe = StreamAFE(port="I2C_0", rate_hz=100)\nstream = afe.attach_channel(modality="PPG_DUAL")\ndetector = PeakDetector(method='second_derivative', refractory_ms=240)\nhrv_metrics = stream.compute_hrv(window_sec=60, method='time_domain')`;
+      navigator.clipboard?.writeText(code).then(() => {
+        const textSpan = document.getElementById('copyText');
+        if (textSpan) {
+          textSpan.innerText = 'COPIED!';
+          setTimeout(() => {
+            textSpan.innerText = 'COPY';
+          }, 2000);
+        }
+      });
+    });
+  </script>
+</div></main></body></html>

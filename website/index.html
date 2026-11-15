@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BioSense Monitor</title>
+  <meta name="description" content="Live brain, heart, motion and skin-temperature readings from your BioSense ESP32 device, explained in plain words." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>try { var t = localStorage.getItem("bs-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+
+<!-- ============ icon sprite ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M12 5v13"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></symbol>
+  <symbol id="i-move" viewBox="0 0 24 24"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M2 8.82a15 15 0 0 1 20 0M12 20h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5 8.5 10.5 2 17M16 7h6v6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M22 17 13.5 8.5 8.5 13.5 2 7M16 17h6v-6"/></symbol>
+  <symbol id="i-flat" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8M21 3v5h-5M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16M8 16H3v5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9V3z"/></symbol>
+</svg>
+
+<!-- ============ top bar ============ -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#/">
+      <span class="brand-mark"><svg class="ic sm"><use href="#i-activity"/></svg></span>
+      <span>BioSense<small data-b="page-name">Monitor</small></span>
+    </a>
+    <div class="spacer"></div>
+    <span class="chip hidden" id="connChip" data-t="conn"><span class="dot pulse"></span><span data-b="conn-text">Live</span></span>
+    <button class="icon-btn" id="themeBtn" title="Switch light / dark" aria-label="Switch light or dark theme">
+      <svg class="ic sm"><use href="#i-sun"/></svg>
+    </button>
+    <button class="icon-btn hidden" id="lockBtn" title="Lock and sign out" aria-label="Lock and sign out">
+      <svg class="ic sm"><use href="#i-logout"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ 1. LANDING ============ -->
+<section class="view" id="view-landing">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <span class="chip m-imu"><span class="dot pulse"></span>Live biosignal monitor</span>
+        <h1 style="margin-top:18px">See what your <em>brain and body</em> are telling you — in plain words.</h1>
+        <p class="lead">BioSense reads your brainwaves, heartbeat, movement and skin temperature from a small wearable device, then turns the raw signals into simple answers: how alert you are, how focused, how stressed, and how steady.</p>
+        <div class="ctas">
+          <a class="btn btn-primary btn-lg" href="#/login">Get started <svg class="ic sm"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-lg" href="#how">How it works</a>
+        </div>
+        <div class="stats">
+          <div class="card"><b>4</b><span>body sensors</span></div>
+          <div class="card"><b>1&nbsp;s</b><span>live updates</span></div>
+          <div class="card"><b>0</b><span>maths to read</span></div>
+        </div>
+      </div>
+      <div class="card scope-card">
+        <div class="card-h"><h3>Live signals preview</h3><div class="spacer"></div><span class="chip m-imu"><span class="dot pulse"></span>Streaming</span></div>
+        <div class="scope-rows" style="margin-top:12px">
+          <div class="scope-labels">
+            <div class="m-eeg">Brain<small>EEG</small></div>
+            <div class="m-ppg">Heart<small>PPG</small></div>
+            <div class="m-imu">Motion<small>IMU</small></div>
+            <div class="m-temp">Skin temp<small>TEMP</small></div>
+          </div>
+          <canvas id="scopeCanvas" aria-label="Animated preview of four signal waveforms"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">What it measures</h2>
+    <div class="grid g-4">
+      <div class="card feature m-eeg"><svg class="ic lg"><use href="#i-brain"/></svg><h3>Your brain</h3><p>A forehead sensor picks up tiny electrical brainwaves and sorts them into slow (sleepy) and fast (alert) rhythms.</p><div class="tags"><span class="chip plain">Alertness</span><span class="chip plain">Focus</span></div></div>
+      <div class="card feature m-ppg"><svg class="ic lg"><use href="#i-heart"/></svg><h3>Your heart</h3><p>A light sensor on your finger reads each pulse — the same way a smartwatch does.</p><div class="tags"><span class="chip plain">Heart rate</span><span class="chip plain">Oxygen</span><span class="chip plain">Stress</span></div></div>
+      <div class="card feature m-imu"><svg class="ic lg"><use href="#i-move"/></svg><h3>Your movement</h3><p>A motion sensor notices if you are moving and measures the tiny wobbles you make while standing still.</p><div class="tags"><span class="chip plain">Activity</span><span class="chip plain">Balance</span></div></div>
+      <div class="card feature m-temp"><svg class="ic lg"><use href="#i-thermo"/></svg><h3>Your skin</h3><p>A precise thermometer tracks skin temperature. Cooling skin can be an early sign of stress.</p><div class="tags"><span class="chip plain">Temperature</span><span class="chip plain">Trend</span></div></div>
+    </div>
+
+    <h2 class="section-title" id="how">How it works</h2>
+    <div class="grid g-3 steps">
+      <div class="card step"><span class="step-n">01</span><div><h4>Unlock</h4><p>Enter your access code to open the monitor.</p></div></div>
+      <div class="card step"><span class="step-n">02</span><div><h4>Connect your device</h4><p>Type the address your BioSense device shows, or try the demo without a device.</p></div></div>
+      <div class="card step"><span class="step-n">03</span><div><h4>Read your results</h4><p>See clear scores and plain-language explanations that update every second.</p></div></div>
+    </div>
+
+    <h2 class="section-title">What you will see</h2>
+    <div class="grid g-4">
+      <div class="card m-eeg"><div class="row"><span class="dot"></span><b>Alertness</b></div><p class="note" style="margin-top:6px">Are you sharp and awake, or drifting towards sleepy?</p></div>
+      <div class="card m-eeg"><div class="row"><span class="dot"></span><b>Focus</b></div><p class="note" style="margin-top:6px">Is your attention holding steady or starting to wander?</p></div>
+      <div class="card m-ppg"><div class="row"><span class="dot"></span><b>Stress level</b></div><p class="note" style="margin-top:6px">One easy 0–100 number built from several signals at once.</p></div>
+      <div class="card m-imu"><div class="row"><span class="dot"></span><b>Steadiness</b></div><p class="note" style="margin-top:6px">How still and balanced you are while standing.</p></div>
+    </div>
+
+    <div class="footer">
+      <div class="callout" data-tone="warn" style="margin-bottom:16px"><svg class="ic sm"><use href="#i-info"/></svg><div><b>Not a medical device.</b> BioSense shows wellness trends for learning and research. It cannot diagnose, treat or prevent any illness.</div></div>
+      © 2026 BioSense Monitor
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. PASSWORD ============ -->
+<section class="view" id="view-login">
+  <div class="center-page">
+    <form class="card auth-card" id="loginForm" autocomplete="off">
+      <div class="auth-icon"><svg class="ic lg"><use href="#i-lock"/></svg></div>
+      <h1>Enter access code</h1>
+      <p class="muted small" style="margin:6px 0 20px">This monitor is private. Type the access code you were given to continue.</p>
+      <label class="eyebrow" for="pw">Access code</label>
+      <div class="field" style="margin-top:8px">
+        <input class="input" id="pw" type="password" placeholder="••••••••" autocomplete="current-password" />
+        <button type="button" class="reveal" id="pwReveal">Show</button>
+      </div>
+      <div class="error-text" id="pwErr" role="alert"></div>
+      <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-top:8px">Unlock <svg class="ic sm"><use href="#i-arrow"/></svg></button>
+      <a class="btn btn-block" href="#/" style="margin-top:10px"><svg class="ic sm"><use href="#i-back"/></svg> Back to home</a>
+    </form>
+  </div>
+</section>
+
+<!-- ============ 3. CONNECT ============ -->
+<section class="view" id="view-connect">
+  <div class="connect-wrap">
+    <div class="stepper"><i class="on"></i><i></i><i></i></div>
+    <div class="eyebrow" style="margin-bottom:18px">Step 1 of 3 · Connect</div>
+    <div class="page-head">
+      <h1>Start connecting</h1>
+      <p>Link this page to your BioSense device so your readings can stream in live.</p>
+    </div>
+
+    <div class="callout hidden" data-tone="bad" data-v="https-warn" style="margin-bottom:16px"><svg class="ic sm"><use href="#i-alert"/></svg><div>This page was opened over <b>https</b>. Browsers block it from talking to the device. Open the <b>index.html</b> file directly from your computer instead.</div></div>
+
+    <div class="card" id="connectCard">
+      <div class="card-h m-pri"><svg class="ic"><use href="#i-wifi"/></svg><h3>Before you start</h3></div>
+      <ol class="howto">
+        <li><b>Switch on</b> the BioSense device and wait about 20 seconds.</li>
+        <li>Make sure this computer or phone is on the <b>same Wi-Fi or hotspot</b> as the device.</li>
+        <li>Find the <b>device address</b>. It is printed in the Arduino Serial Monitor, for example <span class="mono">192.168.43.120</span>.</li>
+      </ol>
+      <label class="eyebrow" for="ip" style="display:block;margin-top:20px">Device address</label>
+      <div class="row" style="margin-top:8px;align-items:stretch">
+        <input class="input" id="ip" placeholder="192.168.43.120" inputmode="url" autocomplete="off" spellcheck="false" />
+        <button class="btn btn-primary" id="connectBtn" style="height:48px;flex:none">Connect</button>
+      </div>
+      <div class="error-text" id="ipErr" role="alert"></div>
+      <div class="divider">or</div>
+      <button class="btn btn-block" id="demoBtn"><svg class="ic sm"><use href="#i-play"/></svg> No device? Try demo mode</button>
+      <p class="note" style="margin-top:8px;text-align:center">Demo mode plays realistic sample readings so you can explore every screen.</p>
+    </div>
+
+    <div class="card hidden" id="sensorCard" style="margin-top:16px">
+      <div class="card-h"><span class="dot pulse" data-tone="good" style="background:var(--good)"></span><h3 data-b="found-title">Device connected</h3></div>
+      <div class="sensor-list">
+        <div class="sensor-row m-eeg"><svg class="ic"><use href="#i-brain"/></svg><div><div class="name">Brain sensor</div><div class="desc">Brainwaves (EEG)</div></div><span class="chip" data-t="s-eeg" data-b="s-eeg">…</span></div>
+        <div class="sensor-row m-ppg"><svg class="ic"><use href="#i-heart"/></svg><div><div class="name">Heart sensor</div><div class="desc">Pulse &amp; oxygen (PPG)</div></div><span class="chip" data-t="s-ppg" data-b="s-ppg">…</span></div>
+        <div class="sensor-row m-imu"><svg class="ic"><use href="#i-move"/></svg><div><div class="name">Motion sensor</div><div class="desc">Movement &amp; balance (IMU)</div></div><span class="chip" data-t="s-imu" data-b="s-imu">…</span></div>
+        <div class="sensor-row m-temp"><svg class="ic"><use href="#i-thermo"/></svg><div><div class="name">Skin thermometer</div><div class="desc">Skin temperature</div></div><span class="chip" data-t="s-temp" data-b="s-temp">…</span></div>
+      </div>
+      <button class="btn btn-primary btn-lg btn-block" style="margin-top:16px" onclick="location.hash='#/check'">Continue <svg class="ic sm"><use href="#i-arrow"/></svg></button>
+      <button class="btn btn-block" id="changeDevBtn" style="margin-top:10px">Use a different device</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. SENSOR CHECK ============ -->
+<section class="view" id="view-check">
+  <div class="connect-wrap">
+    <div class="stepper"><i class="on"></i><i class="on"></i><i></i></div>
+    <div class="eyebrow" style="margin-bottom:18px">Step 2 of 3 · Quick sensor check</div>
+    <div class="page-head">
+      <h1>20-second brain sensor check</h1>
+      <p>A healthy brain shows a strong "calm" rhythm when the eyes are closed, and it drops when they open. Checking this confirms the brain sensor is touching your skin properly, so your results can be trusted.</p>
+    </div>
+    <div class="card m-eeg">
+      <div class="ring check-ring" data-tone="info">
+        <svg viewBox="0 0 100 100"><circle class="trk" cx="50" cy="50" r="44"/><circle class="val" data-r="check" cx="50" cy="50" r="44" style="stroke:var(--eeg)"/></svg>
+        <div class="lbl"><b data-b="check-count">20</b><span class="muted small">seconds</span></div>
+      </div>
+      <p class="eye-instr" data-b="check-instr">Sit comfortably and press Start.</p>
+      <p class="note" style="text-align:center;margin-top:6px" data-b="check-sub">We will tell you when to close and open your eyes.</p>
+      <div class="callout hidden" data-v="check-result" data-t="check-res" style="margin-top:18px"><svg class="ic sm"><use href="#i-check"/></svg><div data-b="check-result">—</div></div>
+      <div class="stack" style="margin-top:18px;gap:10px">
+        <button class="btn btn-primary btn-lg btn-block" id="checkStart"><svg class="ic sm"><use href="#i-eye"/></svg> Start check</button>
+        <button class="btn btn-primary btn-lg btn-block hidden" id="checkDone">See my results <svg class="ic sm"><use href="#i-arrow"/></svg></button>
+        <button class="btn btn-block" id="checkSkip">Skip for now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP SHELL ============ -->
+<div class="app-shell hidden" id="shell">
+  <nav class="sidenav" aria-label="Main">
+    <a class="navlink" href="#/dashboard" data-nav="dashboard"><svg class="ic"><use href="#i-grid"/></svg>Overview</a>
+    <a class="navlink" href="#/brain" data-nav="brain"><svg class="ic"><use href="#i-brain"/></svg>Brain</a>
+    <a class="navlink" href="#/heart" data-nav="heart"><svg class="ic"><use href="#i-heart"/></svg>Heart</a>
+    <a class="navlink" href="#/body" data-nav="body"><svg class="ic"><use href="#i-move"/></svg>Body</a>
+    <a class="navlink" href="#/learn" data-nav="learn"><svg class="ic"><use href="#i-book"/></svg>Learn</a>
+    <div class="spacer"></div>
+    <button class="navlink" id="disconnectBtn"><svg class="ic"><use href="#i-wifi"/></svg>Change device</button>
+  </nav>
+  <main class="main">
+    <div class="wrap">
+
+      <!-- ---------- DASHBOARD ---------- -->
+      <section class="view" id="view-dashboard">
+        <div class="page-head">
+          <div class="eyebrow">Live overview</div>
+          <h1>How you're doing right now</h1>
+          <p data-b="summary" style="color:var(--text);font-size:17px">Waiting for readings from your device…</p>
+        </div>
+        <div class="status-strip">
+          <span class="chip" data-t="conn"><span class="dot pulse"></span><span data-b="conn-text">Live</span></span>
+          <span class="muted">Session <b class="mono" style="color:var(--text)" data-b="session">0:00</b></span>
+          <span class="chip m-pri hidden" data-v="demo">Demo mode</span>
+          <span class="chip plain hidden" data-tone="warn" data-v="simulated">Heart readings are sample values from the device</span>
+          <div class="spacer"></div>
+          <button class="btn" id="exportBtn" style="height:34px"><svg class="ic sm"><use href="#i-download"/></svg> Download session</button>
+        </div>
+
+        <div class="grid g-3">
+          <div class="card m-ppg">
+            <div class="card-h"><svg class="ic"><use href="#i-gauge"/></svg><h3>Stress level</h3></div>
+            <div style="display:flex;justify-content:center">
+              <div class="ring" data-t="stress">
+                <svg viewBox="0 0 100 100"><circle class="trk" cx="50" cy="50" r="44"/><circle class="val" data-r="stress" cx="50" cy="50" r="44"/></svg>
+                <div class="lbl"><span class="big-num" data-b="stress-score">--</span><span class="status-word" data-t="stress" data-b="stress-label">Collecting</span></div>
+              </div>
+            </div>
+            <p class="note" style="margin-top:14px;text-align:center" data-b="stress-note">Measuring your heart rhythm. This takes about a minute.</p>
+            <div class="bar" style="margin-top:10px" data-v="stress-progress"><i data-w="stress-progress" style="background:var(--ppg)"></i></div>
+          </div>
+
+          <div class="card span-2">
+            <div class="card-h"><svg class="ic" style="color:var(--primary)"><use href="#i-zap"/></svg><h3>Your state</h3><div class="spacer"></div><span class="chip plain" data-t="conf" data-b="conf-text">—</span></div>
+            <div class="state-row m-eeg">
+              <div class="head"><span class="name">Alertness</span><span class="val"><span data-b="vig">--</span> · <span data-b="vig-label">—</span></span></div>
+              <div class="bar"><i data-w="vig"></i></div>
+              <p>How awake and switched-on your brain is right now.</p>
+            </div>
+            <div class="state-row m-eeg">
+              <div class="head"><span class="name">Focus</span><span class="val"><span data-b="att">--</span> · <span data-b="att-label">—</span></span></div>
+              <div class="bar"><i data-w="att"></i></div>
+              <p>Whether attention is holding steady or starting to wander. Best read as a trend.</p>
+            </div>
+            <div class="state-row m-ppg" data-t="auto">
+              <div class="head"><span class="name">Body mode</span><span class="val" data-b="auto-label">Collecting…</span></div>
+              <div class="bar"><i data-w="auto"></i></div>
+              <p>From calm "rest &amp; recover" (left) to "alert / stress" mode (right), read from your heart rhythm.</p>
+            </div>
+            <div class="state-row m-imu">
+              <div class="head"><span class="name">Steadiness</span><span class="val"><span data-b="steady">--</span> · <span data-b="steady-label">—</span></span></div>
+              <div class="bar"><i data-w="steady"></i></div>
+              <p>How still and balanced you are. Stand still for 20 seconds for a reading.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title">Live readings</h2>
+        <div class="grid g-3">
+          <div class="card tile m-ppg"><div class="row"><svg class="ic sm pulse-heart"><use href="#i-heart"/></svg><span class="label">Heart rate</span><div class="spacer"></div><span class="chip plain" data-t="hr" data-b="hr-label">—</span></div><div><span class="mid-num" data-b="hr">--</span><span class="unit">beats/min</span></div><canvas class="spark" data-spark="hr"></canvas></div>
+          <div class="card tile m-ppg"><div class="row"><svg class="ic sm" style="color:var(--ppg)"><use href="#i-drop"/></svg><span class="label">Blood oxygen</span><div class="spacer"></div><span class="chip plain" data-t="spo2" data-b="spo2-label">—</span></div><div><span class="mid-num" data-b="spo2">--</span><span class="unit">%</span></div><canvas class="spark" data-spark="spo2"></canvas></div>
+          <div class="card tile m-ppg"><div class="row"><svg class="ic sm" style="color:var(--ppg)"><use href="#i-activity"/></svg><span class="label">Recovery (HRV)</span><div class="spacer"></div><span class="chip plain" data-t="hrv" data-b="hrv-tag">—</span></div><div><span class="mid-num" data-b="hrv">--</span><span class="unit">ms</span></div><canvas class="spark" data-spark="hrv"></canvas></div>
+          <div class="card tile m-temp"><div class="row"><svg class="ic sm" style="color:var(--temp)"><use href="#i-thermo"/></svg><span class="label">Skin temperature</span><div class="spacer"></div><span class="chip plain" data-t="ttrend" data-b="ttrend">—</span></div><div><span class="mid-num" data-b="temp">--</span><span class="unit">°C</span></div><canvas class="spark" data-spark="temp"></canvas></div>
+          <div class="card tile m-imu"><div class="row"><svg class="ic sm" style="color:var(--imu)"><use href="#i-move"/></svg><span class="label">Movement</span><div class="spacer"></div><span class="chip plain" data-t="moving" data-b="moving">—</span></div><div><span class="mid-num" data-b="activity" style="font-size:20px">--</span></div><canvas class="spark" data-spark="motion"></canvas></div>
+          <div class="card tile m-eeg"><div class="row"><svg class="ic sm" style="color:var(--eeg)"><use href="#i-brain"/></svg><span class="label">Brainwave pace</span><div class="spacer"></div><span class="chip plain m-eeg" data-b="pace-word">—</span></div><div><span class="mid-num" data-b="pace">--</span><span class="unit">Hz</span></div><canvas class="spark" data-spark="pace"></canvas></div>
+        </div>
+
+        <h2 class="section-title">Session timeline</h2>
+        <div class="card">
+          <div class="row wrap-r small" style="gap:16px;margin-bottom:10px">
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--eeg)"></span>Alertness</span>
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--ppg)"></span>Stress level</span>
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--imu)"></span>Heart rate</span>
+          </div>
+          <canvas class="chart" data-chart="overview"></canvas>
+        </div>
+
+        <h2 class="section-title">Look closer</h2>
+        <div class="grid g-4">
+          <a class="card m-eeg" href="#/brain" style="color:inherit"><div class="row"><svg class="ic" style="color:var(--eeg)"><use href="#i-brain"/></svg><b>Brain</b><div class="spacer"></div><svg class="ic sm muted"><use href="#i-arrow"/></svg></div><p class="note" style="margin-top:6px">Alertness, focus trend, brainwave mix</p></a>
+          <a class="card m-ppg" href="#/heart" style="color:inherit"><div class="row"><svg class="ic" style="color:var(--ppg)"><use href="#i-heart"/></svg><b>Heart</b><div class="spacer"></div><svg class="ic sm muted"><use href="#i-arrow"/></svg></div><p class="note" style="margin-top:6px">Pulse, oxygen, stress balance</p></a>
+          <a class="card m-imu" href="#/body" style="color:inherit"><div class="row"><svg class="ic" style="color:var(--imu)"><use href="#i-move"/></svg><b>Body</b><div class="spacer"></div><svg class="ic sm muted"><use href="#i-arrow"/></svg></div><p class="note" style="margin-top:6px">Movement, balance, skin temperature</p></a>
+          <a class="card m-pri" href="#/learn" style="color:inherit"><div class="row"><svg class="ic" style="color:var(--primary)"><use href="#i-book"/></svg><b>Learn</b><div class="spacer"></div><svg class="ic sm muted"><use href="#i-arrow"/></svg></div><p class="note" style="margin-top:6px">What every reading means</p></a>
+        </div>
+      </section>
+
+      <!-- ---------- BRAIN ---------- -->
+      <section class="view" id="view-brain">
+        <div class="page-head">
+          <span class="chip m-eeg">Brain · EEG</span>
+          <h1>Your brain</h1>
+          <p>Your brain produces a mix of slow and fast electrical rhythms. Slow rhythms grow when you are sleepy; fast ones grow when you are alert and busy.</p>
+        </div>
+        <div class="stack" style="margin-bottom:16px">
+          <div class="callout hidden" data-tone="info" data-v="eeg-warming"><svg class="ic sm"><use href="#i-info"/></svg><div>The brain sensor is warming up. Readings appear in a few seconds.</div></div>
+          <div class="callout hidden" data-tone="bad" data-v="eeg-sat"><svg class="ic sm"><use href="#i-alert"/></svg><div><b>Signal overloaded.</b> Press the electrodes firmly against clean skin and check the wires. Results are less reliable until this clears.</div></div>
+          <div class="callout hidden" data-tone="warn" data-v="eeg-nocheck"><svg class="ic sm"><use href="#i-info"/></svg><div>The brain sensor check has not been done yet. <a href="#/check">Run the 20-second check</a> so you know these readings can be trusted.</div></div>
+        </div>
+
+        <div class="grid g-2">
+          <div class="card m-eeg">
+            <div class="card-h"><svg class="ic"><use href="#i-zap"/></svg><h3>Alertness</h3><div class="spacer"></div><span class="chip plain" data-t="conf" data-b="conf-text">—</span></div>
+            <div><span class="big-num" data-b="vig">--</span><span class="unit">/ 100</span></div>
+            <div class="status-word" style="margin-top:6px;color:var(--eeg)" data-b="vig-label">—</div>
+            <div class="scale"><div class="scale-track" style="--scale-bg:linear-gradient(90deg,#536375,var(--eeg))"><span class="scale-mark off" data-s="vig"></span></div>
+              <div class="scale-labels"><span>Very drowsy</span><span>Drowsy</span><span>Relaxed</span><span>Alert</span></div></div>
+            <p class="note" style="margin-top:14px" data-b="vig-explain">When you get sleepy, your brain shifts towards slow rhythms. This score watches for that shift.</p>
+          </div>
+          <div class="card m-eeg">
+            <div class="card-h"><svg class="ic"><use href="#i-activity"/></svg><h3>Brainwave pace</h3></div>
+            <div><span class="big-num" data-b="pace">--</span><span class="unit">Hz</span></div>
+            <div class="status-word" style="margin-top:6px;color:var(--eeg)" data-b="pace-label">—</div>
+            <div class="scale"><div class="scale-track" style="--scale-bg:linear-gradient(90deg,#536375,var(--eeg))"><span class="scale-mark off" data-s="pace"></span></div>
+              <div class="scale-labels"><span>Slow · sleepy</span><span>Medium · calm</span><span>Fast · alert</span></div></div>
+            <p class="note" style="margin-top:14px">The "centre of gravity" of all your brain activity in one number. Higher means a faster, busier brain.</p>
+          </div>
+
+          <div class="card m-eeg">
+            <div class="card-h"><svg class="ic"><use href="#i-eye"/></svg><h3>Focus</h3><div class="spacer"></div><span class="chip plain" data-tone="warn">Trend only</span></div>
+            <div><span class="big-num" data-b="att">--</span><span class="unit">/ 100</span></div>
+            <div class="status-word" style="margin-top:6px;color:var(--eeg)" data-b="att-label">—</div>
+            <div class="row" style="margin-top:14px;padding:12px;border-radius:10px;background:var(--recess)">
+              <svg class="ic" data-trend-icon style="color:var(--eeg)"><use href="#i-flat"/></svg>
+              <div><div style="font-weight:600" data-b="trend-text">Building a trend…</div><div class="note" data-b="trend-sub">Needs about 2 minutes of data.</div></div>
+            </div>
+            <p class="note" style="margin-top:14px">Compares "daydreaming" rhythms to "concentrating" rhythms. Scientists still debate how reliable this is, so watch how it changes over time rather than trusting a single number.</p>
+          </div>
+          <div class="card m-eeg">
+            <div class="card-h"><svg class="ic"><use href="#i-grid"/></svg><h3>Brainwave mix</h3><div class="spacer"></div><span class="muted xs">share of total</span></div>
+            <div class="band"><span><b>Deep rest</b> <span class="muted xs">· Delta</span></span><span class="mono" data-b="b-d">--</span><div class="bar"><i data-w="b-d" style="background:#6b7a8f"></i></div><small>Dominant in deep sleep.</small></div>
+            <div class="band"><span><b>Dreamy</b> <span class="muted xs">· Theta</span></span><span class="mono" data-b="b-t">--</span><div class="bar"><i data-w="b-t" style="background:#a18cff"></i></div><small>Daydreaming, drowsiness, drifting thoughts.</small></div>
+            <div class="band"><span><b>Calm</b> <span class="muted xs">· Alpha</span></span><span class="mono" data-b="b-a">--</span><div class="bar"><i data-w="b-a" style="background:var(--eeg)"></i></div><small>Relaxed but awake — stronger with eyes closed.</small></div>
+            <div class="band"><span><b>Thinking</b> <span class="muted xs">· Beta</span></span><span class="mono" data-b="b-b">--</span><div class="bar"><i data-w="b-b" style="background:var(--primary)"></i></div><small>Active concentration (also rises with tension).</small></div>
+            <div class="band"><span><b>Intense</b> <span class="muted xs">· Gamma</span></span><span class="mono" data-b="b-g">--</span><div class="bar"><i data-w="b-g" style="background:var(--imu)"></i></div><small>Fast processing; easily mixed with muscle noise.</small></div>
+          </div>
+
+          <div class="card m-eeg">
+            <div class="card-h"><svg class="ic"><use href="#i-check"/></svg><h3>Sensor check</h3><div class="spacer"></div><span class="chip plain" data-t="asm" data-b="asm-label">Not done</span></div>
+            <div><span class="big-num" data-b="asm">--</span><span class="unit">% drop</span></div>
+            <p class="note" style="margin-top:10px">How much your "calm" rhythm dropped when you opened your eyes. A drop of 20% or more means the sensor is working well.</p>
+            <a class="btn" href="#/check" style="margin-top:14px"><svg class="ic sm"><use href="#i-refresh"/></svg> Run check again</a>
+          </div>
+          <div class="card m-eeg">
+            <div class="card-h"><svg class="ic"><use href="#i-heart"/></svg><h3>Mood lean</h3><div class="spacer"></div><span class="chip plain" data-tone="muted">Not available</span></div>
+            <p class="note">Mood lean (towards "motivated" or "withdrawn") compares calm rhythms on the <b>left and right</b> sides of the forehead. Your device has one brain channel, so this reading needs a two-electrode forehead headset.</p>
+          </div>
+        </div>
+
+        <h2 class="section-title">Over this session</h2>
+        <div class="card">
+          <div class="row wrap-r small" style="gap:16px;margin-bottom:10px">
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--eeg)"></span>Alertness</span>
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--primary)"></span>Focus</span>
+          </div>
+          <canvas class="chart" data-chart="brain"></canvas>
+        </div>
+      </section>
+
+      <!-- ---------- HEART ---------- -->
+      <section class="view" id="view-heart">
+        <div class="page-head">
+          <span class="chip m-ppg">Heart · PPG</span>
+          <h1>Your heart</h1>
+          <p>A light sensor reads every pulse. From the timing between beats we can tell how fast your heart is going and whether your nervous system is calm or on alert.</p>
+        </div>
+        <div class="callout hidden" data-tone="warn" data-v="simulated" style="margin-bottom:16px"><svg class="ic sm"><use href="#i-info"/></svg><div>Your device firmware is currently sending <b>sample heart values</b> (demo dataset), not real finger readings.</div></div>
+
+        <div class="grid g-3">
+          <div class="card m-ppg">
+            <div class="card-h"><svg class="ic pulse-heart"><use href="#i-heart"/></svg><h3>Heart rate</h3><div class="spacer"></div><span class="chip plain" data-t="hr" data-b="hr-label">—</span></div>
+            <div><span class="big-num" data-b="hr">--</span><span class="unit">beats/min</span></div>
+            <div class="scale"><div class="scale-track" style="--scale-bg:linear-gradient(90deg,var(--warn) 0 10%,var(--good) 10% 60%,var(--warn) 60% 100%)"><span class="scale-mark off" data-s="hr"></span></div>
+              <div class="scale-labels"><span>40</span><span>Normal resting 50–100</span><span>140</span></div></div>
+          </div>
+          <div class="card m-ppg">
+            <div class="card-h"><svg class="ic"><use href="#i-drop"/></svg><h3>Blood oxygen</h3><div class="spacer"></div><span class="chip plain" data-t="spo2" data-b="spo2-label">—</span></div>
+            <div><span class="big-num" data-b="spo2">--</span><span class="unit">%</span></div>
+            <div class="scale"><div class="scale-track" style="--scale-bg:linear-gradient(90deg,var(--bad) 0 33%,var(--warn) 33% 66%,var(--good) 66% 100%)"><span class="scale-mark off" data-s="spo2"></span></div>
+              <div class="scale-labels"><span>85</span><span>Normal 95+</span><span>100</span></div></div>
+          </div>
+          <div class="card m-ppg">
+            <div class="card-h"><svg class="ic"><use href="#i-activity"/></svg><h3>Recovery (HRV)</h3><div class="spacer"></div><span class="chip plain" data-t="hrv" data-b="hrv-tag">—</span></div>
+            <div><span class="big-num" data-b="hrv">--</span><span class="unit">ms</span></div>
+            <div class="scale"><div class="scale-track" style="--scale-bg:linear-gradient(90deg,var(--warn),var(--good))"><span class="scale-mark off" data-s="hrv"></span></div>
+              <div class="scale-labels"><span>0</span><span>Typical 20–50</span><span>100</span></div></div>
+            <p class="note" style="margin-top:12px" data-b="hrv-label">How much the gap between heartbeats naturally varies. More variation usually means a rested body.</p>
+          </div>
+
+          <div class="card m-ppg span-2" style="grid-column:1/-1">
+            <div class="card-h"><svg class="ic"><use href="#i-gauge"/></svg><h3>Nervous system balance</h3><div class="spacer"></div><span class="chip plain" data-tone="warn" data-b="auto-conf">—</span></div>
+            <div class="mid-num" style="font-family:var(--sans)" data-b="auto-label">Collecting…</div>
+            <div class="scale"><div class="scale-track" style="--scale-bg:linear-gradient(90deg,var(--good),var(--primary) 50%,var(--bad))"><span class="scale-mark off" data-s="auto"></span></div>
+              <div class="scale-labels"><span>Rest &amp; recover</span><span>Balanced</span><span>Alert / stress</span></div></div>
+            <div class="bar" style="margin-top:14px" data-v="auto-progress"><i data-w="auto-progress" style="background:var(--ppg)"></i></div>
+            <p class="note" style="margin-top:10px" data-b="auto-progress-text"></p>
+            <div class="callout" data-tone="info" style="margin-top:14px"><svg class="ic sm"><use href="#i-thermo"/></svg><div data-b="auto-agree">We also check your skin temperature. When both signals point the same way, the reading is more trustworthy.</div></div>
+            <p class="note" style="margin-top:12px">Your heartbeat is not perfectly regular, and the pattern of tiny speed-ups and slow-downs shows whether your body is in "rest and digest" or "fight or flight" mode. This is the same idea behind stress scores on fitness watches.</p>
+          </div>
+        </div>
+
+        <h2 class="section-title">Over this session</h2>
+        <div class="card">
+          <div class="row wrap-r small" style="gap:16px;margin-bottom:10px">
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--ppg)"></span>Heart rate</span>
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--imu)"></span>Recovery (HRV)</span>
+          </div>
+          <canvas class="chart" data-chart="heart"></canvas>
+        </div>
+      </section>
+
+      <!-- ---------- BODY ---------- -->
+      <section class="view" id="view-body">
+        <div class="page-head">
+          <span class="chip m-imu">Body · Motion &amp; temperature</span>
+          <h1>Your body</h1>
+          <p>How much you are moving, how steady you are when standing still, and what your skin temperature is doing.</p>
+        </div>
+        <div class="grid g-2">
+          <div class="card m-imu">
+            <div class="card-h"><svg class="ic"><use href="#i-move"/></svg><h3>Movement</h3><div class="spacer"></div><span class="chip plain" data-t="moving" data-b="moving">—</span></div>
+            <div class="mid-num" style="font-family:var(--sans)" data-b="activity">--</div>
+            <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">
+              <div style="background:var(--recess);border-radius:8px;padding:10px"><div class="eyebrow">Side</div><div class="mono" data-b="ax">--</div></div>
+              <div style="background:var(--recess);border-radius:8px;padding:10px"><div class="eyebrow">Front</div><div class="mono" data-b="ay">--</div></div>
+              <div style="background:var(--recess);border-radius:8px;padding:10px"><div class="eyebrow">Up</div><div class="mono" data-b="az">--</div></div>
+            </div>
+            <p class="note" style="margin-top:12px">Device tilt: <b class="mono" style="color:var(--text)" data-b="tilt">--</b> from upright.</p>
+          </div>
+          <div class="card m-imu">
+            <div class="card-h"><svg class="ic"><use href="#i-gauge"/></svg><h3>Balance / steadiness</h3></div>
+            <div><span class="big-num" data-b="steady">--</span><span class="unit">/ 100</span></div>
+            <div class="status-word" style="margin-top:6px;color:var(--imu)" data-b="steady-label">—</div>
+            <div class="scale"><div class="scale-track" style="--scale-bg:linear-gradient(90deg,var(--bad),var(--warn),var(--good))"><span class="scale-mark off" data-s="steady"></span></div>
+              <div class="scale-labels"><span>Unsteady</span><span>Some wobble</span><span>Very steady</span></div></div>
+            <div class="bar" style="margin-top:14px" data-v="sway-progress"><i data-w="sway-progress" style="background:var(--imu)"></i></div>
+            <p class="note" style="margin-top:10px" data-b="sway-note">Stand still for 20 seconds to measure your natural sway.</p>
+          </div>
+
+          <div class="card m-temp">
+            <div class="card-h"><svg class="ic"><use href="#i-thermo"/></svg><h3>Skin temperature</h3></div>
+            <div><span class="big-num" data-b="temp">--</span><span class="unit">°C</span> <span class="muted mono" style="margin-left:8px" data-b="tempf">-- °F</span></div>
+            <div class="scale"><div class="scale-track" style="--scale-bg:linear-gradient(90deg,#3b82f6,var(--good) 30% 80%,var(--temp))"><span class="scale-mark off" data-s="temp"></span></div>
+              <div class="scale-labels"><span>26 °C</span><span>Typical skin 30–35</span><span>38 °C</span></div></div>
+            <div class="callout hidden" data-tone="warn" data-v="offskin" style="margin-top:14px"><svg class="ic sm"><use href="#i-info"/></svg><div>This is lower than normal skin. The sensor may not be touching your skin.</div></div>
+          </div>
+          <div class="card m-temp">
+            <div class="card-h"><svg class="ic" data-ttrend-icon><use href="#i-flat"/></svg><h3>Temperature trend</h3></div>
+            <div class="mid-num" style="font-family:var(--sans)" data-b="ttrend-big">Measuring…</div>
+            <p class="mono muted" style="margin-top:6px" data-b="tslope">--</p>
+            <p class="note" style="margin-top:12px" data-b="ttrend-explain">When you are stressed, blood vessels in the skin tighten and the skin cools within minutes. A cold room can do the same, so this is only used as a supporting clue.</p>
+          </div>
+        </div>
+
+        <h2 class="section-title">Over this session</h2>
+        <div class="card">
+          <div class="row wrap-r small" style="gap:16px;margin-bottom:10px">
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--temp)"></span>Skin temperature</span>
+            <span class="row" style="gap:6px"><span class="dot" style="background:var(--imu)"></span>Steadiness</span>
+          </div>
+          <canvas class="chart" data-chart="body"></canvas>
+        </div>
+      </section>
+
+      <!-- ---------- LEARN ---------- -->
+      <section class="view" id="view-learn">
+        <div class="page-head">
+          <span class="chip m-pri">Learn</span>
+          <h1>What every reading means</h1>
+          <p>No maths, just what each measurement tells you and where you have probably seen it before.</p>
+        </div>
+        <div class="grid g-2" id="learnGrid"></div>
+        <div class="callout" data-tone="warn" style="margin-top:20px"><svg class="ic sm"><use href="#i-info"/></svg><div><b>Reading note:</b> every result here is a trend built from several signals agreeing with each other, not a medical diagnosis. Where the science is still debated (the focus score and the stress balance), we say so instead of hiding it behind a confident number.</div></div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<nav class="bottomnav hidden" id="bottomnav" aria-label="Main">
+  <a class="navlink" href="#/dashboard" data-nav="dashboard"><svg class="ic"><use href="#i-grid"/></svg>Overview</a>
+  <a class="navlink" href="#/brain" data-nav="brain"><svg class="ic"><use href="#i-brain"/></svg>Brain</a>
+  <a class="navlink" href="#/heart" data-nav="heart"><svg class="ic"><use href="#i-heart"/></svg>Heart</a>
+  <a class="navlink" href="#/body" data-nav="body"><svg class="ic"><use href="#i-move"/></svg>Body</a>
+  <a class="navlink" href="#/learn" data-nav="learn"><svg class="ic"><use href="#i-book"/></svg>Learn</a>
+</nav>
+
+<script src="js/config.js"></script>
+<script src="js/metrics.js"></script>
+<script src="js/device.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
